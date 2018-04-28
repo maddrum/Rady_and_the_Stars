@@ -1,5 +1,5 @@
 var $form = $('form#message_form'),
-    url = 'https://script.google.com/macros/s/AKfycbxi1ET1_UAltZoUYCLRaZTLTikgSSkdreqk6qHG-wS4r_FDps0r/exec'
+    url = 'https://script.google.com/macros/s/AKfycbxi1ET1_UAltZoUYCLRaZTLTikgSSkdreqk6qHG-wS4r_FDps0r/exec';
 
 $('#submit-form').on('click', function(e) {
   e.preventDefault();
@@ -11,4 +11,4 @@ $('#submit-form').on('click', function(e) {
   }).success(
     // do something
   );
-})
+});

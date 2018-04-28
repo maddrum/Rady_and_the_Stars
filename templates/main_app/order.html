@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+#TODO submit fade-out
 {% extends 'base.html' %}
 {% block page_title %}Поръчай онлайн {% endblock %}
 {% block body_contents %}
@@ -23,7 +24,7 @@
     {% if order_completed %}
         <p>Вашата поръчка е получена. Ще се свържа с Вас възможно най-скоро!</p>
     {% else %}
-        <form name="order" action="{% url 'main_app:order' %}" method="post">
+        <form action="{% url 'main_app:order' %}" method="post">
             {% csrf_token %}
             <div class="row uniform">
                 <div class="6u 12u$(xsmall)">
@@ -55,7 +56,7 @@
                     <li><input type="submit" id="submit-button" value="ИЗПРАТИ"></li>
                     <li><input type="reset" class="alt" value="ИЗЧИСТИ"></li>
                     <script>
-                        $('#submit-button').on('click', function () {
+                        $('#submit-button').on('submit', function () {
                             var div_success = $('.container');
                             div_success.eq(2).fadeOut(2000);
                             setTimeout(function () {

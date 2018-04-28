@@ -75,13 +75,13 @@
 						</div>
 					</form>
 				<script>
-					const scriptURL = 'https://script.google.com/macros/s/AKfycby170aa6UIhFlCZMnZ0WiALbcvKn4Ghl8g7ibZoWao6a-pSh_WY/exec'
-					const form = document.forms['message-form']
+					const scriptURL = 'https://script.google.com/macros/s/AKfycby170aa6UIhFlCZMnZ0WiALbcvKn4Ghl8g7ibZoWao6a-pSh_WY/exec';
+					const form = document.forms['message-form'];
 					form.addEventListener('submit', e => {
-						e.preventDefault()
+						e.preventDefault();
 						fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-							.then(response => console.log('Success!', response))
-							.catch(error => console.error('Error!', error.message))
+							.then(response => console.log('Success!', response);)
+							.catch(error => console.error('Error!', error.message);)
 					})
 				</script>
 			</div>

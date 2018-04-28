@@ -34,13 +34,15 @@ def contacts(request):
     contacts_form = SiteContactsForm()
     data_dict = {
         'message_received': False,
-        'whole_form': contacts_form,
+        'whole_form': contacts_form
     }
     if request.method == 'POST':
         contacts_form = SiteContactsForm(request.POST)
         if contacts_form.is_valid():
+            data_dict['message_received'] = True
             contacts_form.save()
-            data_dict['message_received']: True
+    print(data_dict)
+
     return render(request, 'main_app/contacts.html', data_dict)
 
 

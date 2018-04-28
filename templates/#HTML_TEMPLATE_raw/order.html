@@ -103,13 +103,13 @@
 					</div>
 				</form>
 				<script>
-					const scriptURL = 'https://script.google.com/macros/s/AKfycbzPJvsbEWq78kB2gtnkiDZfcMvx7fw8KIoXEdHOuXS6-tneCxo/exec'
-					const form = document.forms['order']
+					const scriptURL = 'https://script.google.com/macros/s/AKfycbzPJvsbEWq78kB2gtnkiDZfcMvx7fw8KIoXEdHOuXS6-tneCxo/exec';
+					const form = document.forms['order'];
 					form.addEventListener('submit', e => {
-						e.preventDefault()
+						e.preventDefault();
 						fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-							.then(response => console.log('Success!', response))
-							.catch(error => console.error('Error!', error.message))
+							.then(response => console.log('Success!', response);)
+							.catch(error => console.error('Error!', error.message);)
 					})
 				</script>
 			</div>

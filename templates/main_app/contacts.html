@@ -1,55 +1,54 @@
 <!DOCTYPE html>
+#TODO submit fade-out
+
 {% extends 'base.html' %}
 {% block page_title %}
     свържи се с мен
 {% endblock %}
 {% block body_contents %}
-    <div id="main" class="container">
-        <h3>Моля, попълнете формата за контакт и аз ще се свържа с Вас възможно най-скоро!</h3>
-        <p style="color:red"><em>полетата отбелязани със *** са задължителни!</em></p>
-        <br>
-        <form name="message-form" action="{% url 'main_app:contacts' %}">
-            {% csrf_token %}
-
-            <div class="row uniform">
-                <div class="6u 12u$(xsmall)">
-                    {{ whole_form.names }}
+    {% if not message_received %}
+        <div id="main" class="container">
+            <h3>Моля, попълнете формата за контакт и аз ще се свържа с Вас възможно най-скоро!</h3>
+            <p style="color:red"><em>полетата отбелязани със *** са задължителни!</em></p>
+            <br>
+            <form action="{% url 'main_app:contacts' %}" method="post">
+                {% csrf_token %}
+                <div class="row uniform">
+                    <div class="6u 12u$(xsmall)">
+                        {{ whole_form.names }}
+                    </div>
+                    <div class="6u$ 12u$(xsmall)">
+                        {{ whole_form.email }}
+                    </div>
                 </div>
-                <div class="6u$ 12u$(xsmall)">
-                    {{ whole_form.email }}
+                <br>
+                <div class="12u$">
+                    {{ whole_form.phone }}
                 </div>
-            </div>
-            <br>
-            <div class="12u$">
-                {{ whole_form.phone }}
-            </div>
-            <br>
-            <div class="12u$">
-                {{ whole_form.message }}
-{#                <textarea name="message" placeholder="*Твоят въпрос" rows="6" required></textarea>#}
-            </div>
-            <br>
-            <!-- Break -->
-            <div class="12u$">
-                <ul class="actions">
-                    <li><input type="submit" id="submit-button" value="Изпрати!"></li>
-                    <li><input type="reset" class="alt"/></li>
-                    <script>
-                        $('#submit-button').on('click', function () {
-                            var div_success = $('.container');
-                            div_success.eq(0).fadeOut(1500);
-{#                            div_success.eq(0).fadeIn(1000);#}
-                            setTimeout(function () {
-                                div_success[0].innerHTML = "<p>Вашият въпрос беше успешно получен. Ще се свържа с Вас възможно най-скоро!</p>";
-                            }, 1501);
+                <br>
+                <div class="12u$">
+                    {{ whole_form.message }}
+                </div>
+                <br>
+                <!-- Break -->
+                <div class="12u$">
+                    <ul class="actions">
+                        <li><input type="submit" id="submit-button" value="Изпрати!"></li>
+                        <li><input type="reset" class="alt"/></li>
+                        <script>
+                            $('#submit-button').on('submit', function () {
+                                var div_success = $('.container');
+                                div_success.eq(1).fadeOut(1500);
 
-                        });
-                    </script>
-                </ul>
-            </div>
-
-        </form>
-    </div>
+                            });
+                        </script>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    {% else %}
+        <div class="container"><h4>Вашето запитване е получено!</h4></div>
+    {% endif %}
 
 
     <div class="cointainer">
