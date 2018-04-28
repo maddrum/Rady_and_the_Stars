@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block page_title %} проведени курсове {% endblock %}
+{% block body_contents %}
+    <or>
+        {% for course in courses %}
+            {% if user in course.user_visited_course.all %}
+                <li>
+                    <a href="{{ course.id }}/">{{ course.course_name }}</a>
+                    <br>
+                    <div class="container">
+                        <h3>Дати на провеждане:</h3>
+                        <div class="content">
+                            {{ course.course_start_date }} - {{ course.course_end_date }}
+                        </div>
+                    </div>
+                </li>
+                {% elif forloop.counter == courses.count %}
+
+            {% endif %}
+
+
+        {% endfor %}
+    </or>
+{% endblock %}

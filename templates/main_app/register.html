@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+{% extends 'base.html' %}
+{% block page_title %}
+    регистрирай се
+{% endblock %}
+{% block body_contents %}
+    <div class="container">
+
+        {% if registered %}
+            <p>Регистрацията беше успешно! Моля, натистни
+                <a href="{% url 'main_app:index' %}">тук </a>
+                , за да се върнеш на началната страница!
+            </p>
+        {% elif  user.is_authenticated %}
+            <p>Вече си влезнал! Моля, натистни
+                <a href="{% url 'main_app:index' %}">тук </a>
+                , за да се върнеш на началната страница!
+            </p>
+        {% elif passwords_not_match %}
+            <p>Въведените пароли не са еднакви! Моля, натистни
+                <a href="{% url 'main_app:register' %}"> тук </a>
+                , за да въведете отново!
+            </p>
+        {% else %}
+            <form action="{% url 'main_app:register' %}" method="post">
+                {% csrf_token %}
+                <div class="row uniform">
+                    <div class="6u 12u$(xsmall)">
+                        {{ register_form }}
+                    </div>
+                </div>
+                <div class="12u$">
+                    <ul class="actions">
+                        <br>
+                        <li><input type="submit" id="submit-button" value="Регистрирай се!"></li>
+                    </ul>
+                </div>
+
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

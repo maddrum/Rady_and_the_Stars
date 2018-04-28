@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>&#9733;&#9734;Rady and the Stars&#9734;&#9733; </title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script
+  		src="https://code.jquery.com/jquery-3.1.1.min.js"
+  		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  		crossorigin="anonymous"></script>
+	</head>
+	<body class="subpage">
+
+		<!-- Header -->
+			<header id="header">
+				<div class="logo"><a href="index.html">Rady  <span>and the Stars</span></a></div>
+				<a href="#menu">Menu</a>
+			</header>
+
+		<!-- Nav -->
+			<nav id="menu">
+				<ul class="links">
+					<li><a href="index.html">начало</a></li>
+					<li><a href="order.html">запиши си час</a></li>
+					<li><a href="rady.html">За мен</a></li>
+					<li><a href="contacts.html">контакт</a></li>
+				</ul>
+			</nav>
+
+		<!-- One -->
+		<section id="One" class="wrapper style3">
+			<div class="inner">
+				<header class="align-center">
+					<p>Свържи се с мен</p>
+					<h2>Rady and the stars</h2>
+				</header>
+			</div>
+		</section>
+		<!-- Main -->
+
+		<div id="main" class="container">
+
+				<form name="message-form">
+					<div class="row uniform">
+						<div class="6u 12u$(xsmall)">
+							<input type="text" name="name" value="" placeholder="*Твоите имена" required>
+						</div>
+						<div class="6u$ 12u$(xsmall)">
+							<input type="email" name="email"  value="" placeholder="Твоят email">
+						</div>
+						<div class="12u$">
+							<input type="text" name="phone"  value="" placeholder="*Твоят телефон" required>
+						</div>
+						<div class="12u$">
+							<textarea name="message" placeholder="*Enter your message" rows="6" required></textarea>
+						</div>
+						<!-- Break -->
+						<div class="12u$">
+							<ul class="actions">
+								<li><input type="submit" id = "submit-button"></li>
+								<li><input type="reset" class="alt" /></li>
+								<script>
+										$('#submit-button').on('click', function() {
+										var div_success = $('.container');
+										div_success.eq(0).fadeOut(1500);
+										div_success.eq(0).fadeIn(1000);
+										setTimeout(function () {
+											div_success[0].innerHTML = "<p>Вашият въпрос беше успешно получен. Ще се свържа с Вас възможно най-скоро!</p>";
+										},1501);
+
+									});
+								</script>
+							</ul>
+						</div>
+					</form>
+				<script>
+					const scriptURL = 'https://script.google.com/macros/s/AKfycby170aa6UIhFlCZMnZ0WiALbcvKn4Ghl8g7ibZoWao6a-pSh_WY/exec'
+					const form = document.forms['message-form']
+					form.addEventListener('submit', e => {
+						e.preventDefault()
+						fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+							.then(response => console.log('Success!', response))
+							.catch(error => console.error('Error!', error.message))
+					})
+				</script>
+			</div>
+		</div>
+
+		<div class = "cointainer">
+			<dl class="align-justify">
+				<dt>Други начини за контакт с мен:</dt>
+				<dd>
+					<p>Телефон: +359 88 428 4207</p>
+					<p>Email: <a href="mailto:radyandthestars@gmail.com">radyandthestars@gmail.com</a>
+					<p>SKYPE: Radostina.happylina - > <a href="skype:Radostina.happylina?chat">Започни чат</a></p>
+					<p>Facebook: <a href="https://www.facebook.com/radyandthestars/" >Rady and the stars</a></p>
+				</dd>
+			</dl>
+		</div>
+		</div>
+
+		<!-- Footer -->
+			<footer id="footer">
+				<div class="container">
+					<ul class="icons">
+						<li><a href="https://www.facebook.com/radyandthestars/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://www.instagram.com/rady_and_the_stars/" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="mailto:radyandthestars@gmail.com" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+					</ul>
+				</div>
+				<div class="copyright">
+					&copy; Untitled. All rights reserved.
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

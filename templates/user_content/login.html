@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+
+{% extends 'base.html' %}
+{% block page_title %}
+    Вход за потребители
+{% endblock %}
+{% block body_contents %}
+    <div class="container">
+        {% if user.is_authenticated %}
+            <p>Вече си влязъл като {{ user.username }}</p>
+            <p> Натисни <a href="{% url 'user_content:index' %}">тук</a> или изчакай! </p>
+        {% elif login_failed %}
+            <p>Грешно потребителсно име или парола!</p>
+            <p><a href="{% url 'user_content:user_login' %}">Опитай отново!</a></p>
+        {% elif account_not_active %}
+            <p>Акаунта е неактивен. Моля, сяържете се с мен за подробности! </p>
+            <p><a href="{% url 'main_app:index' %}">Върни се в началото</a></p>
+        {% else %}
+            <p style="font-size: 15pt"> Нямаш регистрация??! -
+                <a href="{% url 'main_app:register' %}">Регистрирай се, сега!</a>
+            </p>
+            <form action="{% url 'user_content:user_login' %}" method="post">
+                {% csrf_token %}
+                <div class="row uniform">
+                    <div class="6u 12u$(xsmall)">
+                        <label for="username">Потребителско име:</label>
+                        <input type="text" name="username" placeholder="Моля, въведете потребителско име">
+                        <label for="password">Парола:</label>
+                        <input type="password" name="password" placeholder="Моля, въведете парола">
+                    </div>
+                </div>
+                <div class="12u$">
+                    <ul class="actions">
+                        <br>
+                        <li><input type="submit" id="submit-button" value="Влез!"></li>
+                    </ul>
+                </div>
+
+            </form>
+        {% endif %}
+    </div>
+
+{% endblock %}

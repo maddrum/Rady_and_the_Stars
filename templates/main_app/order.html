@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block page_title %}Поръчай онлайн {% endblock %}
+{% block body_contents %}
+    <div class="container">
+        <h3>Какво поръчвате:</h3>
+        <dl>
+            <dt>Пълен хороскоп</dt>
+            <dd>
+                <p>Описание на услуга 1</p>
+            </dd>
+            <dt>Item 2</dt>
+            <dd>
+                <p>Описание на услуга 2.</p>
+            </dd>
+            <dt>Item 3</dt>
+            <dd>
+                <p>Описание на услуга 3.</p>
+            </dd>
+        </dl>
+    </div>
+    <div id="main" class="container">
+    {% if order_completed %}
+        <p>Вашата поръчка е получена. Ще се свържа с Вас възможно най-скоро!</p>
+    {% else %}
+        <form name="order" action="{% url 'main_app:order' %}" method="post">
+            {% csrf_token %}
+            <div class="row uniform">
+                <div class="6u 12u$(xsmall)">
+                    {{ whole_form.names }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ whole_form.email }}
+                </div>
+            </div>
+            <br>
+
+            <div class="12u$">
+                {{ whole_form.phone }}
+            </div>
+            <br>
+            <div class="12u$">
+                <div class="select-wrapper">
+                    {{ whole_form.service_requested }}
+                </div>
+            </div>
+            <br>
+            <div class="12u$">
+                {{ whole_form.add_info }}
+            </div>
+            <br>
+            <!-- Break -->
+            <div class="12u$">
+                <ul class="actions">
+                    <li><input type="submit" id="submit-button" value="ИЗПРАТИ"></li>
+                    <li><input type="reset" class="alt" value="ИЗЧИСТИ"></li>
+                    <script>
+                        $('#submit-button').on('click', function () {
+                            var div_success = $('.container');
+                            div_success.eq(2).fadeOut(2000);
+                            setTimeout(function () {
+                                div_success[1].innerHTML = "<p>Вашата поръчка е получена. Ще се свържа с Вас възможно най-скоро!</p>";
+                            }, 2001);
+                        });
+                    </script>
+                </ul>
+            </div>
+        </form>
+    {% endif %}
+
+
+{% endblock %}

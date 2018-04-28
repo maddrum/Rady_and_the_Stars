@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block page_title %}
+    свържи се с мен
+{% endblock %}
+{% block body_contents %}
+    <div id="main" class="container">
+        <h3>Моля, попълнете формата за контакт и аз ще се свържа с Вас възможно най-скоро!</h3>
+        <p style="color:red"><em>полетата отбелязани със *** са задължителни!</em></p>
+        <br>
+        <form name="message-form" action="{% url 'main_app:contacts' %}">
+            {% csrf_token %}
+
+            <div class="row uniform">
+                <div class="6u 12u$(xsmall)">
+                    {{ whole_form.names }}
+                </div>
+                <div class="6u$ 12u$(xsmall)">
+                    {{ whole_form.email }}
+                </div>
+            </div>
+            <br>
+            <div class="12u$">
+                {{ whole_form.phone }}
+            </div>
+            <br>
+            <div class="12u$">
+                {{ whole_form.message }}
+{#                <textarea name="message" placeholder="*Твоят въпрос" rows="6" required></textarea>#}
+            </div>
+            <br>
+            <!-- Break -->
+            <div class="12u$">
+                <ul class="actions">
+                    <li><input type="submit" id="submit-button" value="Изпрати!"></li>
+                    <li><input type="reset" class="alt"/></li>
+                    <script>
+                        $('#submit-button').on('click', function () {
+                            var div_success = $('.container');
+                            div_success.eq(0).fadeOut(1500);
+{#                            div_success.eq(0).fadeIn(1000);#}
+                            setTimeout(function () {
+                                div_success[0].innerHTML = "<p>Вашият въпрос беше успешно получен. Ще се свържа с Вас възможно най-скоро!</p>";
+                            }, 1501);
+
+                        });
+                    </script>
+                </ul>
+            </div>
+
+        </form>
+    </div>
+
+
+    <div class="cointainer">
+        <dl class="align-justify">
+            <dt>Други начини за контакт с мен:</dt>
+            <dd>
+                <p>Телефон: +359 88 428 4207</p>
+                <p>Email: <a href="mailto:radyandthestars@gmail.com">radyandthestars@gmail.com</a>
+                <p>SKYPE: Radostina.happylina - > <a href="skype:Radostina.happylina?chat">Започни чат</a></p>
+                <p>Facebook: <a href="https://www.facebook.com/radyandthestars/">Rady and the stars</a></p>
+            </dd>
+        </dl>
+    </div>
+    </div>
+
+{% endblock %}
