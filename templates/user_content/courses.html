@@ -3,8 +3,8 @@
 {% block page_title %} проведени курсове {% endblock %}
 {% block body_contents %}
     <or>
-        {% for course in courses %}
-            {% if user in course.user_visited_course.all %}
+        {% if courses %}
+            {% for course in courses %}
                 <li>
                     <a href="{{ course.id }}/">{{ course.course_name }}</a>
                     <br>
@@ -15,11 +15,11 @@
                         </div>
                     </div>
                 </li>
-                {% elif forloop.counter == courses.count %}
-
-            {% endif %}
-
-
-        {% endfor %}
-    </or>
+            {% endfor %}
+            </or>
+        {% else %}
+            <p> Не си посещавала мой курс, но винаги може да опиташ.</p>
+            <p>Ако има някаква неточност, моля свържи се с мен</p>
+            <p>#TODO евентуално записване за мейлинг лист</p>
+        {% endif %}
 {% endblock %}

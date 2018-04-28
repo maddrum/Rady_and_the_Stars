@@ -3,16 +3,13 @@
 {% block page_title %} видео към курса: "{{ links.course_name }}" {% endblock %}
 
 {% block body_contents %}
-    {% for link in links.user_visited_course.all %}
-        <p>{{ link }}</p>
-    {% endfor %}
-
-    <or>
-        {% for link in links.course_video.all %}
-            <li>
-                <a href="{{ link.URL_link }}">{{ link.video_is_about }}</a>
-
-            </li>
-        {% endfor %}
-    </or>
+    <div class="container">
+        <or>
+            {% for link in links.course_video.all %}
+                <li>
+                    <a href="{{ link.URL_link }}">{{ link.video_is_about }}</a>
+                </li>
+            {% endfor %}
+        </or>
+    </div>
 {% endblock %}
