@@ -9,15 +9,18 @@ from . import models
 # Create your views here.
 def user_register(request):
     user_reg = UserRegisterForm()
+    user_extra_reg = UserRegisterExtraDataForm()
     data_dict = {
         'register_form': user_reg,
+        'extra_data_form': user_extra_reg,
         'registered': False,
         'passwords_not_match': False,
         'valid_data': True
     }
     if request.method == "POST":
         user_reg = UserRegisterForm(request.POST)
-        if user_reg.is_valid():
+        user_extra_reg = UserRegisterExtraDataForm(request.POST)
+        if user_reg.is_valid() and user_extra_reg.is_valid():
             temp_dict = user_reg.data
             if temp_dict['password'] != temp_dict['repeat_password']:
                 data_dict['registered'] = False
@@ -26,6 +29,11 @@ def user_register(request):
                 user = user_reg.save()
                 user.set_password(user.password)
                 user.save()
+                print(user)
+                profile = user_extra_reg.save(commit=False)
+                profile.user = user
+                print(profile)
+                profile.save()
                 data_dict['registered'] = True
                 logging_username = temp_dict['username']
                 logging_password = temp_dict['password']

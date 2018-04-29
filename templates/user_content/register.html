@@ -10,7 +10,7 @@
         {% if registered %}
             <p>Регистрацията беше успешнa! Моля, натистни
                 <a href="{% url 'user_content:index' %}">тук </a>
-                , за да отидеш на началната страница!
+                , за да отидеш на началната страница на портала!
             </p>
         {% elif  user.is_authenticated %}
             <p>Вече си влезнал! Моля, натистни
@@ -20,7 +20,7 @@
         {% elif passwords_not_match %}
             <p>Въведените пароли не са еднакви! Моля, натистни
                 <a href="{% url 'user_content:register' %}"> тук </a>
-                , за да повторна регистрация!
+                , за да въведете отново!
             </p>
         {% else %}
             <form action="{% url 'user_content:register' %}" method="post">
@@ -30,6 +30,10 @@
                         <h3>*Задължителни полета:</h3>
                         {{ register_form.as_p }}
                         <br><br>
+
+                        <h3>Незадължителни полета</h3>
+                        {{ extra_data_form.as_p }}
+
                     </div>
                 </div>
                 <div class="12u$">
