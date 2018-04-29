@@ -17,7 +17,7 @@
             <p><a href="{% url 'main_app:index' %}">Върни се в началото</a></p>
         {% else %}
             <p style="font-size: 15pt"> Нямаш регистрация??! -
-                <a href="{% url 'main_app:register' %}">Регистрирай се, сега!</a>
+                <a href="{% url 'user_content:register' %}">Регистрирай се, сега!</a>
             </p>
             <form action="{% url 'user_content:user_login' %}" method="post">
                 {% csrf_token %}

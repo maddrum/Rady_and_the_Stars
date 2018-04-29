@@ -1,7 +1,5 @@
 from django.shortcuts import render
-from main_app.forms import UserRegisterForm
 from main_app.forms import SiteContactsForm, SiteOrderForm
-from django.contrib.auth import authenticate, login
 
 
 # Create your views here.
@@ -44,31 +42,3 @@ def contacts(request):
     print(data_dict)
 
     return render(request, 'main_app/contacts.html', data_dict)
-
-
-def user_register(request):
-    user_reg = UserRegisterForm()
-    data_dict = {
-        'register_form': user_reg,
-        'registered': False,
-        'passwords_not_match': False,
-        'valid_data': True
-    }
-    if request.method == "POST":
-        user_reg = UserRegisterForm(request.POST)
-        if user_reg.is_valid():
-            temp_dict = user_reg.data
-            if temp_dict['password'] != temp_dict['repeat_password']:
-                data_dict['registered'] = False
-                data_dict['passwords_not_match'] = True
-            else:
-                user = user_reg.save()
-                user.set_password(user.password)
-                user.save()
-                data_dict['registered'] = True
-                logging_username = temp_dict['username']
-                logging_password = temp_dict['password']
-                logged_user = authenticate(username=logging_username, password=logging_password)
-                if logged_user:
-                    login(request, logged_user)
-    return render(request, 'main_app/register.html', data_dict)

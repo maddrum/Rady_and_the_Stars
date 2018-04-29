@@ -2,10 +2,40 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import DetailView, ListView
+from user_content.forms import UserRegisterForm, UserRegisterExtraDataForm
 from . import models
 
 
 # Create your views here.
+def user_register(request):
+    user_reg = UserRegisterForm()
+    data_dict = {
+        'register_form': user_reg,
+        'registered': False,
+        'passwords_not_match': False,
+        'valid_data': True
+    }
+    if request.method == "POST":
+        user_reg = UserRegisterForm(request.POST)
+        if user_reg.is_valid():
+            temp_dict = user_reg.data
+            if temp_dict['password'] != temp_dict['repeat_password']:
+                data_dict['registered'] = False
+                data_dict['passwords_not_match'] = True
+            else:
+                user = user_reg.save()
+                user.set_password(user.password)
+                user.save()
+                data_dict['registered'] = True
+                logging_username = temp_dict['username']
+                logging_password = temp_dict['password']
+                logged_user = authenticate(username=logging_username, password=logging_password)
+                if logged_user:
+                    login(request, logged_user)
+
+    return render(request, 'user_content/register.html', data_dict)
+
+
 def user_login(request):
     data_dict = {
         'login_failed': False,
@@ -43,7 +73,8 @@ class CoursesListView(ListView):
     model = models.Courses
     context_object_name = 'courses'
     template_name = 'user_content/courses.html'
-#Пренадписване на резултата който дава ListView - за да покаже само логнатите юзъри
+
+    # Пренадписване на резултата който дава ListView - за да покаже само логнатите юзъри
     def get_queryset(self):
         queryset = super(CoursesListView, self).get_queryset()
         queryset = queryset.filter(user_visited_course=self.request.user)

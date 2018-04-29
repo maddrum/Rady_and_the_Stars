@@ -8,26 +8,28 @@
     <div class="container">
 
         {% if registered %}
-            <p>Регистрацията беше успешно! Моля, натистни
-                <a href="{% url 'main_app:index' %}">тук </a>
-                , за да се върнеш на началната страница!
+            <p>Регистрацията беше успешнa! Моля, натистни
+                <a href="{% url 'user_content:index' %}">тук </a>
+                , за да отидеш на началната страница!
             </p>
         {% elif  user.is_authenticated %}
             <p>Вече си влезнал! Моля, натистни
-                <a href="{% url 'main_app:index' %}">тук </a>
+                <a href="{% url 'user_content:index' %}">тук </a>
                 , за да се върнеш на началната страница!
             </p>
         {% elif passwords_not_match %}
             <p>Въведените пароли не са еднакви! Моля, натистни
-                <a href="{% url 'main_app:register' %}"> тук </a>
-                , за да въведете отново!
+                <a href="{% url 'user_content:register' %}"> тук </a>
+                , за да повторна регистрация!
             </p>
         {% else %}
-            <form action="{% url 'main_app:register' %}" method="post">
+            <form action="{% url 'user_content:register' %}" method="post">
                 {% csrf_token %}
                 <div class="row uniform">
                     <div class="6u 12u$(xsmall)">
-                        {{ register_form }}
+                        <h3>*Задължителни полета:</h3>
+                        {{ register_form.as_p }}
+                        <br><br>
                     </div>
                 </div>
                 <div class="12u$">

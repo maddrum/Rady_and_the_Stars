@@ -1,27 +1,6 @@
 from django import forms
-from django.forms import models, widgets
-from django.contrib.auth.models import User
+from django.forms import models
 from main_app.models import SiteContacts, SiteOrders
-
-
-class UserRegisterForm(models.ModelForm):
-    # регистрация на нов потребител. Потребителите ще се регистрират от мейн-апп, а после ще могат да попълват допълнителната информация в юзър конктент
-    class Meta:
-        model = User
-        fields = ('username', 'email', 'password')
-        widgets = {
-            'password': forms.PasswordInput
-        }
-        help_texts = {
-            'username': None,
-        }
-        labels = {
-            'username': "Потребителско име:",
-            'password': "Парола:",
-            'email': 'Email',
-        }
-
-    repeat_password = forms.CharField(label="Моля, повторете паролата:", widget=widgets.PasswordInput)
 
 
 class SiteContactsForm(models.ModelForm):

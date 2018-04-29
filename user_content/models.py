@@ -6,12 +6,14 @@ from django.contrib.auth.models import User
 class SiteUser(models.Model):
     # Описва съдържанието на отделен юзър
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    birthday = models.DateTimeField(blank=True)
+    birthday = models.DateField(blank=True,null=True)
+    hour_of_birth = models.TimeField(blank=True,null=True)
     phone = models.CharField(max_length=50, blank=True)
+    used_service = models.BooleanField(choices=((True, "Да"), (False, "Не")), default=False)
     profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
-    horoscopes = models.TextField()
-    city_of_birth = models.CharField(max_length=250)
-    country_of_birth = models.CharField(max_length=250)
+    horoscopes = models.TextField(blank=True)
+    city_of_birth = models.CharField(max_length=250, blank=True)
+    country_of_birth = models.CharField(max_length=250, blank=True)
 
     def __str__(self):
         return self.user.username

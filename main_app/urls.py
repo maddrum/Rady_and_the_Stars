@@ -1,5 +1,6 @@
 from django.urls import re_path
 from main_app import views
+from user_content import views as user_content_view
 
 app_name = 'main_app'
 urlpatterns = [
@@ -8,6 +9,6 @@ urlpatterns = [
     re_path(r'order/', views.order, name="order"),
     re_path(r'Rady/', views.Rady, name="Rady"),
     re_path(r'contacts/', views.contacts, name="contacts"),
-    re_path(r'register', views.user_register, name="register"),
+    re_path(r'register', user_content_view.user_register)
 
 ]
