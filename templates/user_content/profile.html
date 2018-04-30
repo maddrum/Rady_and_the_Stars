@@ -1,0 +1,41 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %}
+    твоят профил
+{% endblock %}
+{% block body_contents %}
+
+
+    <div id="w">
+        <div id="content" class="clearfix">
+            <div id="userphoto"><img src="{% static 'images/avatar.png' %}" alt="default avatar"></div>
+            <nav id="profiletabs">
+                <ul class="clearfix">
+                    <li><a href="{% url 'user_content:profile' %}" class="sel">Инфо</a></li>
+                    <li><a href="{% url 'user_content:settings' %}"> Настройки</a></li>
+                    <li><a href="{% url 'user_content:horoscope_list' %}">Хороскопи</a></li>
+                </ul>
+            </nav>
+            <div class="container">
+                <br>
+                {% for item in main_info %}
+                    <br>
+                    Здравей, {{ item.username }}!<br>
+                    От тук можеш да управляваш и коригираш информацията за твоят профил. <br>
+                    Ако си използвал или поръчал моя услуга в писмен вид, виж секция "Хороскопи"<br>
+                    Твоето име:{{ item.first_name }} {{ item.last_name }}<br>
+                    Твоят емейл{{ item.email }}
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+{% endblock %}
+
