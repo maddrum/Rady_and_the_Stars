@@ -21,5 +21,7 @@ urlpatterns = [
     re_path(r'^$', views.index, name='index'),
     re_path(r'site/', include('main_app.urls')),
     re_path(r'userportal/', include('user_content.urls')),
-    path('admin/', admin.site.urls),
+    re_path(r'usercourses/', include('courses.urls')),
+    re_path(r'daytarot/',include('tarot_of_the_day.urls')),
+    re_path(r'admin/', admin.site.urls),
 ]

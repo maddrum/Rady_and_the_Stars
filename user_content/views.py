@@ -77,24 +77,6 @@ def index(request):
     return render(request, 'user_content/index.html', data_dict)
 
 
-class CoursesListView(ListView):
-    model = models.Courses
-    context_object_name = 'courses'
-    template_name = 'user_content/courses.html'
-
-    # Пренадписване на резултата който дава ListView - за да покаже само логнатите юзъри
-    def get_queryset(self):
-        queryset = super(CoursesListView, self).get_queryset()
-        queryset = queryset.filter(user_visited_course=self.request.user)
-        return queryset
-
-
-class CoursesUrlView(DetailView):
-    template_name = 'user_content/courses_links.html'
-    model = models.Courses
-    context_object_name = 'links'
-
-
 def user_profile_view(request):
     username = request.user
     user_main_profile = models.User.objects.filter(username=username)

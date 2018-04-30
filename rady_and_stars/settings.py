@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'main_app',
     'user_content',
+    'courses',
+    'tarot_of_the_day',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +126,6 @@ STATIC_DIR = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     STATIC_DIR,
 ]
+MEDIA_DIR = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = MEDIA_DIR
+MEDIA_URL = '/media/'
