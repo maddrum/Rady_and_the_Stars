@@ -24,7 +24,7 @@ SECRET_KEY = '5b5g6d^scon3-4s3t5zec#$*-7j^r7pmqbicy5jsb2@c6zno78'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.102', 'maddrum.pythonanywhere.com']
 
 # Application definition
 

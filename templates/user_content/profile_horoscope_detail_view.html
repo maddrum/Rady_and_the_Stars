@@ -1,0 +1,37 @@
+<!doctype html>
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %}
+    {{ horoscopes_detail.title }}
+{% endblock %}
+{% block body_contents %}
+
+
+    <div id="w">
+        <div id="content" class="clearfix" align="justify">
+
+            <div id="userphoto"><img src="{% static 'images/avatar.png' %}" alt="default avatar"></div>
+            <nav id="profiletabs">
+                <ul class="clearfix">
+                    <li><a href="{% url 'user_content:profile' %}">Инфо</a></li>
+                    <li><a href="{% url 'user_content:settings' %}"> Настройки</a></li>
+                    <li><a href="{% url 'user_content:horoscope_list' %}" class="sel">Хороскопи</a></li>
+                </ul>
+            </nav>
+            <br>
+            <h2>{{ horoscopes_detail.title }}</h2>
+
+            {{ horoscopes_detail.article_text }}
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+{% endblock %}
+

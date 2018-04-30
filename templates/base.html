@@ -9,7 +9,8 @@
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
-    <link rel="stylesheet" href="{% static 'css/master.css' %}">
+    <link rel="stylesheet" type="text/css" media="all" href="{% static 'css/style_user_page.css' %}">
+
     <script
             src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
@@ -43,12 +44,16 @@
     <ul class="links">
         {% if user.is_authenticated %}
             {% return_menu_items "logged" as site_menu %}
+            {% for item,value in site_menu.items %}
+                <li><a href="/userportal/{{ value.1 }}">{{ value.0 }}</a></li>
+            {% endfor %}
         {% else %}
             {% return_menu_items "not_logged" as site_menu %}
+            {% for item,value in site_menu.items %}
+                <li><a href="/site/{{ value.1 }}">{{ value.0 }}</a></li>
+            {% endfor %}
         {% endif %}
-        {% for item,value in site_menu.items %}
-            <li><a href="/site/{{ value.1 }}">{{ value.0 }}</a></li>
-        {% endfor %}
+
     </ul>
 </nav>
 

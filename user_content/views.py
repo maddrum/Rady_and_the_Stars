@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic import DetailView, ListView, UpdateView
 from user_content.forms import UserRegisterForm, UserRegisterExtraDataForm
 from . import models
 
@@ -86,5 +86,41 @@ def user_profile_view(request):
         'main_info': user_main_profile,
         'extra_info': user_extra_info,
     }
-    print(data_dict['extra_info'].values_list())
-    return render(request, 'user_content/profile_view.html', data_dict)
+
+    return render(request, 'user_content/profile.html', data_dict)
+
+
+class UserHoroscopesListView(ListView):
+    model = models.TextsForUser
+    context_object_name = 'horoscopes_list'
+    template_name = "user_content/profile_horoscope_list_view.html"
+
+    def get_queryset(self):
+        queryset = super(UserHoroscopesListView, self).get_queryset()
+        username = self.request.user
+        queryset = queryset.filter(username=username)
+        return queryset
+
+
+class UserHoroscopesDetailView(DetailView):
+    model = models.TextsForUser
+    context_object_name = 'horoscopes_detail'
+    template_name = 'user_content/profile_horoscope_detail_view.html'
+
+
+class MainUserSettingsUpdateView(UpdateView):
+    model = models.User
+    template_name = 'user_content/profile_main_settings_update.html'
+    fields = ('email,first_name,last_name')
+
+
+class ExtraUserSettingsUpdateView(UpdateView):
+    model = models.SiteUser
+    template_name = 'user_content/profile_extra_settings_update.html'
+    context_object_name = 'extra_info'
+    fields = ('birthday', 'phone', 'city_of_birth')
+
+    def get_object(self, queryset=None):
+        username = self.request.user
+        queryset = models.SiteUser.objects.get(user=username)
+        return queryset

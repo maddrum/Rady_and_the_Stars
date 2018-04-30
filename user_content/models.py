@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 # Create your models here.
@@ -17,12 +18,14 @@ class SiteUser(models.Model):
     def __str__(self):
         return self.user.username
 
+    def get_absolute_url(self):
+        return reverse('user_content:profile')
+
 
 class TextsForUser(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     article_text = models.CharField(max_length=20000)
-
 
 # class Courses(models.Model):
 #     # описва отделните курсове - начало край и име
