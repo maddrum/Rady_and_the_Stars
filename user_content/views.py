@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
-from django.views.generic import DetailView, ListView
+from django.views.generic import DetailView, ListView, CreateView
 from user_content.forms import UserRegisterForm, UserRegisterExtraDataForm
 from . import models
 
@@ -93,3 +93,16 @@ class CoursesUrlView(DetailView):
     template_name = 'user_content/courses_links.html'
     model = models.Courses
     context_object_name = 'links'
+
+
+def user_profile_view(request):
+    username = request.user
+    user_main_profile = models.User.objects.filter(username=username)
+    user_id = user_main_profile.values_list('id')[0][0]
+    user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
+    data_dict = {
+        'main_info': user_main_profile,
+        'extra_info': user_extra_info,
+    }
+    print(data_dict['extra_info'].values_list())
+    return render(request, 'user_content/profile_view.html', data_dict)

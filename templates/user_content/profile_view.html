@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% extends 'base.html' %}
+{% block body_contents %}
+    {% for item in main_info %}
+        <p> Username: {{ item.username }}</p>
+        <p>{{ item.email }}</p>
+        <p>{{ item.first_name }}</p>
+        <p>{{ item.last_name }}</p>
+    {% endfor %}
+    {% for item in extra_info %}
+        <p>{{ item.birthday }}</p>
+        <p>{{ item.hour_of_birth }}</p>
+        <p>{{ item.phone }}</p>
+        <p>{{ item.used_service }}</p>
+        <p>{{ item.city_of_birth }}</p>
+        <p>{{ item.country_of_birth }}</p>
+    {% endfor %}
+
+
+
+
+{% endblock %}

@@ -28,7 +28,8 @@ class UserRegisterForm(models.ModelForm):
 class UserRegisterExtraDataForm(models.ModelForm):
     class Meta:
         model = SiteUser
-        fields = ('profile_pic', 'used_service', 'birthday', 'hour_of_birth', 'city_of_birth', 'country_of_birth')
+        fields = (
+            'profile_pic', 'phone', 'used_service', 'birthday', 'hour_of_birth', 'city_of_birth', 'country_of_birth')
         labels = {
             'profile_pic': "Изберете профилна снимка",
             'used_service': 'Използвали ли сте мои услуги досега?',
@@ -36,4 +37,5 @@ class UserRegisterExtraDataForm(models.ModelForm):
             'hour_of_birth': 'Час на раждане',
             'city_of_birth': 'Град на раждане',
             'country_of_birth': 'Държава на раждане',
+            'phone': 'Телефон'
         }
