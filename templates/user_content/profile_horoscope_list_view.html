@@ -24,8 +24,7 @@
                     <ul>
                         <h2>Това са нещата написани за теб:</h2>
                         {% for item in horoscopes_list %}
-                            <li><a
-                                    href="detail_text{{ item.id }}">{{ item.title }}</a>
+                            <li><a href="/userportal/detail_text{{ item.id }}">{{ item.title }}</a>
                             </li>
                         {% endfor %}
                     </ul>

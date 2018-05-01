@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import login, logout, authenticate
 from django.views.generic import DetailView, ListView, UpdateView
 from user_content.forms import UserRegisterForm, UserRegisterExtraDataForm
@@ -80,7 +81,10 @@ def index(request):
 def user_profile_view(request):
     username = request.user
     user_main_profile = models.User.objects.filter(username=username)
-    user_id = user_main_profile.values_list('id')[0][0]
+    try:
+        user_id = user_main_profile.values_list('id')[0][0]
+    except IndexError:
+        return redirect('index')
     user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
     data_dict = {
         'main_info': user_main_profile,
@@ -90,7 +94,8 @@ def user_profile_view(request):
     return render(request, 'user_content/profile.html', data_dict)
 
 
-class UserHoroscopesListView(ListView):
+class UserHoroscopesListView(LoginRequiredMixin, ListView):
+    login_url = 'userportal/login/'
     model = models.TextsForUser
     context_object_name = 'horoscopes_list'
     template_name = "user_content/profile_horoscope_list_view.html"
@@ -102,19 +107,22 @@ class UserHoroscopesListView(ListView):
         return queryset
 
 
-class UserHoroscopesDetailView(DetailView):
+class UserHoroscopesDetailView(LoginRequiredMixin, DetailView):
     model = models.TextsForUser
+    login_url = '/login'
     context_object_name = 'horoscopes_detail'
     template_name = 'user_content/profile_horoscope_detail_view.html'
 
 
-class MainUserSettingsUpdateView(UpdateView):
+class MainUserSettingsUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'userportal/login/'
     model = models.User
     template_name = 'user_content/profile_main_settings_update.html'
     fields = ('email,first_name,last_name')
 
 
-class ExtraUserSettingsUpdateView(UpdateView):
+class ExtraUserSettingsUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'userportal/login/'
     model = models.SiteUser
     template_name = 'user_content/profile_extra_settings_update.html'
     context_object_name = 'extra_info'
