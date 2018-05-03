@@ -17,12 +17,15 @@ from django.contrib import admin
 from django.conf.urls import url
 from django.urls import include
 from main_app import views
+from django.contrib.auth import views as login_view
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'site/', include('main_app.urls')),
     url(r'userportal/', include('user_content.urls')),
     url(r'usercourse/', include('courses.urls')),
-    url(r'daytarot/',include('tarot_of_the_day.urls')),
+    url(r'daytarot/', include('tarot_of_the_day.urls')),
     url(r'admin/', admin.site.urls),
+    url(r'login/', login_view.login, name="user_login" ),
+    url(r'logout/', login_view.logout, name="logout", kwargs={'next_page': '/'}),
 ]

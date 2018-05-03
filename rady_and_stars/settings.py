@@ -24,7 +24,7 @@ SECRET_KEY = '5b5g6d^scon3-4s3t5zec#$*-7j^r7pmqbicy5jsb2@c6zno78'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.102', 'maddrum.pythonanywhere.com','127.0.0.1',]
+ALLOWED_HOSTS = ['192.168.0.102', 'maddrum.pythonanywhere.com', '127.0.0.1', ]
 
 # Application definition
 
@@ -129,3 +129,4 @@ STATICFILES_DIRS = [
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+LOGIN_REDIRECT_URL = '/userportal/index'

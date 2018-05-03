@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block page_title %}
+    Вход за потребители
+{% endblock %}
+{% block body_contents %}
+    <div class="container">
+        <br><br>
+        <p style="font-size: 15pt"> Нямаш регистрация??! -
+            <a href="{% url 'user_content:register' %}">Регистрирай се</a>
+        </p>
+        {% if form.errors %}
+            <p>Невалидни данни за вход. Моля, опитайте отново!</p>
+        {% endif %}
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Влез">
+            <input type="hidden" name="next" value="{{ next }}">
+        </form>
+    </div>
+
+
+{% endblock %}

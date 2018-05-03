@@ -32,9 +32,9 @@
         <a href="#">АДМИН</a>
     {% endif %}
     {% if user.is_authenticated %}
-        <a href={% url 'user_content:logout' %}>Излез</a>
+        <a href={% url 'logout' %}>Излез</a>
     {% else %}
-        <a href="{% url 'user_content:user_login' %}">ВХОД</a>
+        <a href="{% url 'user_login' %}">ВХОД</a>
     {% endif %}
     <a href="#menu">МЕНЮ</a>
 </header>
@@ -70,13 +70,14 @@
         </header>
     </div>
 </section>
-<div id="main" class="container">
+{#<div id="main" class="container">#}
+{#</div>#}
 
     {% block body_contents %}
     {% endblock %}
 
 
-</div>
+
 
 <footer id="footer">
     <div class="container">

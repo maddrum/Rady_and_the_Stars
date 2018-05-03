@@ -1,12 +1,11 @@
 from django.conf.urls import url
 from user_content import views
+from django.contrib.auth import views as login_view
 
 app_name = 'user_content'
 
 urlpatterns = [
     url(r'register/', views.user_register, name="register"),
-    url(r'login/', views.user_login, name="user_login"),
-    url(r'logout/', views.user_logout, name="logout"),
     url(r'index/', views.index, name='index'),
     url(r'profile/', views.user_profile_view, name='profile'),
     url(r'horoscope_list/', views.UserHoroscopesListView.as_view(), name="horoscope_list"),
