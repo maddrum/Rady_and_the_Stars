@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block page_title %}
+    твоята карта за деня
+{% endblock %}
+{% block body_contents %}
+    <div id="main" class="container">
+        {% for item in card_of_the_day %}
+            <h2>Твоята карта за деня е : {{ item.name }}</h2>
+            {% with image_static='tarot/'|add:item.picture_name %}
+                <p><img src="{% static   image_static %}"></p>
+            {% endwith %}
+            {{ item.meaning }}
+        {% endfor %}
+
+
+    </div>
+{% endblock %}

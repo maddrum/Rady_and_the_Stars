@@ -16,27 +16,6 @@ class UserCreateForm(UserCreationForm):
             'email': 'Email',
         }
 
-    # class UserRegisterForm(models.ModelForm):
-    #     # регистрация на нов потребител. Потребителите ще се регистрират от мейн-апп, а после ще могат да попълват допълнителната информация в юзър конктент
-    #     class Meta:
-    #         model = User
-    #         fields = ('username', 'email', 'password')
-    #         widgets = {
-    #             'password': forms.PasswordInput,
-    #             'email': widgets.EmailInput,
-    #         }
-    #         help_texts = {
-    #             'username': None,
-    #         }
-    #         labels = {
-    #             'username': "Потребителско име:",
-    #             'password': "Парола:",
-    #             'email': 'Email',
-    #         }
-    #
-    #     repeat_password = forms.CharField(label="Моля, повторете паролата:", widget=widgets.PasswordInput)
-    #
-
     class UserRegisterExtraDataForm(models.ModelForm):
         class Meta:
             model = SiteUser

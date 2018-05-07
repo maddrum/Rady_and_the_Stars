@@ -18,7 +18,15 @@
                     <li><a href="{% url 'user_content:horoscope_list' %}">Хороскопи</a></li>
                 </ul>
             </nav>
+
             <br>
+            <h2 align="center">Настройки</h2>
+            <nav id="profiletabs_settings">
+                <ul class="clearfix">
+                    <li><a href="{% url 'user_content:profile' %} " class="sel">Допълнителни</a></li>
+                    <li><a href="{% url 'user_content:settings' %}">Основни</a></li>
+                </ul>
+            </nav>
             <br>
             <br>
             <form method="post">

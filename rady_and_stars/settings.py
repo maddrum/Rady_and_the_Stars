@@ -35,10 +35,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'main_app',
     'user_content',
     'courses',
     'tarot_of_the_day',
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'rady_and_stars.urls'
@@ -130,3 +133,4 @@ MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/userportal/index'
+INTERNAL_IPS = ['127.0.0.1']
