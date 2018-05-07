@@ -20,12 +20,12 @@ from main_app import views
 from django.contrib.auth import views as login_view
 
 urlpatterns = [
-    url(r'^$', views.index, name='index'),
+    url(r'^$', views.Index.as_view(), name='index'),
     url(r'site/', include('main_app.urls')),
     url(r'userportal/', include('user_content.urls')),
     url(r'usercourse/', include('courses.urls')),
     url(r'daytarot/', include('tarot_of_the_day.urls')),
     url(r'admin/', admin.site.urls),
-    url(r'login/', login_view.login, name="user_login" ),
-    url(r'logout/', login_view.logout, name="logout", kwargs={'next_page': '/'}),
+    url(r'login/', login_view.LoginView.as_view(template_name='user_content/login.html'), name='user_login'),
+    url(r'logout/', login_view.logout, name="logout", kwargs={'next_page': 'index'}),
 ]

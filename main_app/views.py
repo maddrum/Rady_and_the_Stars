@@ -1,44 +1,34 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from main_app.forms import SiteContactsForm, SiteOrderForm
+from django.views.generic import TemplateView, CreateView
 
 
 # Create your views here.
 
-def index(request):
-    data_dict = {}
-    return render(request, 'main_app/index.html', data_dict)
+class Index(TemplateView):
+    template_name = 'main_app/index.html'
 
 
-def order(request):
-    order_form = SiteOrderForm()
-    data_dict = {
-        'whole_form': order_form,
-        'order_completed': False
-    }
-    if request.method == "POST":
-        user_form = SiteOrderForm(request.POST)
-        if user_form.is_valid():
-            user_form.save()
-            data_dict['order_completed'] = True
-    return render(request, 'main_app/order.html', data_dict)
+class OrderThankYou(TemplateView):
+    template_name = 'main_app/order_thank_you.html'
 
 
-def Rady(request):
-    data_dict = {}
-    return render(request, 'main_app/Rady.html', data_dict)
+class ContactsThankYou(TemplateView):
+    template_name = 'main_app/contacts_thank_you.html'
 
 
-def contacts(request):
-    contacts_form = SiteContactsForm()
-    data_dict = {
-        'message_received': False,
-        'whole_form': contacts_form
-    }
-    if request.method == 'POST':
-        contacts_form = SiteContactsForm(request.POST)
-        if contacts_form.is_valid():
-            data_dict['message_received'] = True
-            contacts_form.save()
-    print(data_dict)
+class Order(CreateView):
+    form_class = SiteOrderForm
+    template_name = 'main_app/order.html'
+    success_url = reverse_lazy('main_app:order_thank_you')
 
-    return render(request, 'main_app/contacts.html', data_dict)
+
+class Rady(TemplateView):
+    template_name = 'main_app/Rady.html'
+
+
+class Contacts(CreateView):
+    template_name = 'main_app/contacts.html'
+    form_class = SiteContactsForm
+    success_url = reverse_lazy('main_app:contacts_thank_you')
