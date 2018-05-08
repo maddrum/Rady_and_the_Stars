@@ -1,31 +1,53 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% block html_title_and_links %}
+    <title>Таро на деня</title>
+
+{% endblock %}
 {% block page_title %}
-    твоята карта за деня
+    таро карта за деня
 {% endblock %}
 {% block body_contents %}
     {% for item in day_tarot %}
         <section id="two" class="wrapper style2">
-            <div class="inner">
-                <div class="box">
-                    <div class="content">
-                        <header class="align-center">
-                            <p>Твоята карта за деня е:</p>
-                            <h2>{{ item.name }}</h2>
-                        </header>
-                        {% with image_static='tarot/'|add:item.picture_name %}
-                            <div class="row 20% uniform" style="color: #252431; text-align: justify;margin-top: 30px">
-                            <span class="image left"><img src="{% static   image_static %}"></span>
-                        {% endwith %}
-                        <br><br><br>
-                        {{ item.meaning }}
-                        </div>
+        <div class="inner">
+            <div class="box">
+                <div class="content">
+                    <header class="align-center">
+                        <p>Твоята карта за деня е:</p>
+                        <h2>{{ item.name }}</h2>
+                    </header>
 
+                    {% with image_static='tarot/'|add:item.picture_name %}
+                        <div class="row 50% uniform" style="color: #252431; text-align: justify;margin-top: 30px">
+                        <p style="font-size: 20px">
+                        <span class="image left"><img src="{% static   image_static %}"></span>
+                    {% endwith %}
+                    {{ item.meaning }}
+                    </p>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+
     {% endfor %}
+
+{% for item in user_tarot %}
+    <div class="inner">
+        <div class="box">
+            <div class="container">
+                <h3>Ти изтегли тази карта на {{ item.date_used }}</h3>
+                <h4>Твоите бележки за картата </h4>
+                {{ item.user_notes }}
+                <br>
+
+                <input id="note-input-button" class="button special" value="Редактирай"
+
+            </div>
+        </div>
+    </div>
+    </section>
+{% endfor %}
 
 
 {% endblock %}
