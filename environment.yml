@@ -1,0 +1,29 @@
+name: django_env
+channels:
+  - defaults
+dependencies:
+  - certifi=2018.1.18=py36_0
+  - django=2.0.2=py36hd476221_0
+  - pip=9.0.3=py36_0
+  - python=3.6.5=h0c2934d_0
+  - pytz=2018.3=py36_0
+  - setuptools=39.0.1=py36_0
+  - vc=14=h0510ff6_3
+  - vs2015_runtime=14.0.25123=3
+  - wheel=0.31.0=py36_0
+  - wincertstore=0.2=py36h7fe50ca_0
+  - pip:
+    - argon2-cffi==18.1.0
+    - bcrypt==3.1.4
+    - cffi==1.11.5
+    - django-bootstrap3==10.0.1
+    - django-debug-toolbar==1.9.1
+    - faker==0.8.13
+    - pillow==5.1.0
+    - pycparser==2.18
+    - python-dateutil==2.7.2
+    - six==1.11.0
+    - sqlparse==0.2.4
+    - text-unidecode==1.2
+prefix: C:\Anaconta_python\envs\django_env
+

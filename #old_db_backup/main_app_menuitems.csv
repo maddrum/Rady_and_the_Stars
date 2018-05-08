@@ -1,0 +1,10 @@
+menu_number,menu_item,menu_link,logged_in
+1,начало,index,0
+2,запиши си час,order,0
+3,за мен,Rady,0
+4,контакт,contacts,0
+5,профил,profile,1
+6,Таро на деня,tarrot,1
+7,Моите курсове,courses,1
+8,Изход,logout,1
+9,регистрирай се,register,0
