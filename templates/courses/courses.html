@@ -2,24 +2,23 @@
 {% extends 'base.html' %}
 {% block page_title %} проведени курсове {% endblock %}
 {% block body_contents %}
-    <or>
-        {% if courses %}
-            {% for course in courses %}
-                <li>
-                    <a href="{{ course.id }}/">{{ course.course_name }}</a>
-                    <br>
-                    <div class="container">
-                        <h3>Дати на провеждане:</h3>
-                        <div class="content">
-                            {{ course.course_start_date }} - {{ course.course_end_date }}
-                        </div>
-                    </div>
-                </li>
-            {% endfor %}
-            </or>
-        {% else %}
-            <p> Не си посещавала мой курс, но винаги може да опиташ.</p>
-            <p>Ако има някаква неточност, моля свържи се с мен</p>
-            <p>#TODO евентуално записване за мейлинг лист</p>
-        {% endif %}
+    <div id="main" class="container">
+        <div class="box">
+           <h2>Проведени курсове до момента</h2>
+            <or>
+                {% if courses %}
+                    {% for course in courses %}
+                        <li><a href="{{ course.id }}/">{{ course.course_name }}</a>
+                            <p>Дати на провеждане:{{ course.course_start_date }} - {{ course.course_end_date }}</p>
+                        </li>
+                    {% endfor %}
+                    </or>
+                {% else %}
+                    <p> Не си посещавала мой курс, но винаги може да опиташ.</p>
+                    <p>Ако има някаква неточност, моля свържи се с мен</p>
+                    <p>#TODO евентуално записване за мейлинг лист</p>
+                {% endif %}
+        </div>
+    </div>
+
 {% endblock %}
