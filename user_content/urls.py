@@ -1,6 +1,5 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
 from user_content import views
-from django.contrib.auth import views as login_view
 
 app_name = 'user_content'
 
@@ -12,4 +11,7 @@ urlpatterns = [
     url(r'detail_text(?P<pk>\d+)/', views.UserHoroscopesDetailView.as_view(), name="detail"),
     url(r'settings/', views.ExtraUserSettingsUpdateView.as_view(), name='settings'),
     url(r'main_settings/', views.MainUserSettingsUpdateView.as_view(), name='main_settings'),
+    url(r'courses/', include('courses.urls', namespace='user_courses')),
+    url(r'tarot/', include('tarot_of_the_day.urls', namespace='user_tarot')),
+
 ]

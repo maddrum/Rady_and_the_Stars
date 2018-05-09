@@ -29,3 +29,9 @@ class UserCard(models.Model):
         random_number = randint(1, 78)
         self.date_card_id = random_number
         self.save()
+
+    @classmethod
+    def change_user_note(self, pk, new_user_note):
+        filtered_info = self.objects.get(id=pk)
+        filtered_info.user_notes = new_user_note
+        filtered_info.save()

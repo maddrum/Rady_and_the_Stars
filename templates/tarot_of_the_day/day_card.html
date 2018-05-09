@@ -2,7 +2,6 @@
 {% load staticfiles %}
 {% block html_title_and_links %}
     <title>Таро на деня</title>
-
 {% endblock %}
 {% block page_title %}
     таро карта за деня
@@ -38,16 +37,31 @@
             <div class="container">
                 <h3>Ти изтегли тази карта на {{ item.date_used }}</h3>
                 <h4>Твоите бележки за картата </h4>
-                {{ item.user_notes }}
+                <p class="editable_textarea" role="button" tabindex="0"
+                   title="Click to edit">{{ item.user_notes }}</p>
                 <br>
-
-                <input id="note-input-button" class="button special" value="Редактирай"
-
+                {#                <input id="note-input-button" class="button special" value="Редактирай" type="button">#}
             </div>
         </div>
     </div>
     </section>
 {% endfor %}
+    <script>
+        $(document).ready(function () {
+            $(".editable_textarea").editable("{% url 'user_content:tarot_of_the_day:card_of_the_day' %}", {
+                type: 'textarea',
+                submit: 'Редактирай',
+                cancelcssclass: 'button alt',
+                submitcssclass: 'button special',
+                cancel: 'Отказ',
+                width: 600,
+                tooltip: 'Натистни за промяна',
+                indicator: 'Запазване...',
+                submitdata: {csrfmiddlewaretoken: "{{ csrf_token }}"}
+            });
+        });
+
+    </script>
 
 
 {% endblock %}
