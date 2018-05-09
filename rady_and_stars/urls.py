@@ -19,15 +19,17 @@ from django.urls import include
 from main_app import views
 from django.contrib.auth import views as login_view
 from . import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
-    url(r'^$', views.Index.as_view(), name='index'),
-    url(r'site/', include('main_app.urls')),
-    url(r'userportal/', include('user_content.urls')),
-    url(r'login/', login_view.LoginView.as_view(template_name='user_content/login.html'), name='user_login'),
-    url(r'logout/', login_view.logout, name="logout", kwargs={'next_page': 'index'}),
-    url(r'admin/', admin.site.urls),
-]
+                  url(r'^$', views.Index.as_view(), name='index'),
+                  url(r'site/', include('main_app.urls')),
+                  url(r'userportal/', include('user_content.urls', namespace='user_site')),
+                  url(r'login/', login_view.LoginView.as_view(template_name='user_content/login.html'),
+                      name='user_login'),
+                  url(r'logout/', login_view.logout, name="logout", kwargs={'next_page': 'index'}),
+                  url(r'admin/', admin.site.urls),
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:
     import debug_toolbar
 

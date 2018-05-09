@@ -3,6 +3,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from django.utils import timezone
 from random import randint
+from django.shortcuts import redirect
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 
 
 # Create your models here.
@@ -19,6 +22,9 @@ class UserCard(models.Model):
     date_used = models.DateField(default='')
     date_card = models.ForeignKey(TarotCard, on_delete=models.CASCADE, related_name='user_card')
     user_notes = models.TextField(blank=True)
+
+    def get_absolute_url(self, *args, **kwargs):
+        return reverse('user_site:profile_tarot_detail', kwargs={'pk': self.pk})
 
     def random_card(self, logged_user_id):
         current_date = timezone.localdate()

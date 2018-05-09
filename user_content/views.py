@@ -2,15 +2,15 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView, UpdateView, TemplateView, CreateView
-from user_content.forms import UserCreateForm
-from . import models
+from user_content.forms import SiteUserCreateForm
+from user_content import models
+from tarot_of_the_day import models as tarot_model
 from django.urls import reverse_lazy
-from django.contrib.auth import get_user_model
 
 
 # Create your views here.
 class UserRegister(CreateView):
-    form_class = UserCreateForm
+    form_class = SiteUserCreateForm
     success_url = reverse_lazy('user_content:index')
     template_name = 'user_content/register.html'
 
@@ -50,7 +50,7 @@ class UserHoroscopesListView(LoginRequiredMixin, ListView):
 
 class UserHoroscopesDetailView(LoginRequiredMixin, DetailView):
     model = models.TextsForUser
-    login_url = '/login'
+    login_url = 'userportal/login/'
     context_object_name = 'horoscopes_detail'
     template_name = 'user_content/profile_horoscope_detail_view.html'
 
@@ -73,3 +73,30 @@ class ExtraUserSettingsUpdateView(LoginRequiredMixin, UpdateView):
         username = self.request.user
         queryset = models.SiteUser.objects.get(user=username)
         return queryset
+
+
+class UserTarotListView(LoginRequiredMixin, ListView):
+    model = tarot_model.UserCard
+    context_object_name = 'tarot_list'
+    template_name = 'user_content/profile_tarot_list.html'
+
+    def get_queryset(self):
+        queryset = super(UserTarotListView, self).get_queryset()
+        user_id = self.request.user.id
+        queryset = queryset.filter(username_id=user_id).order_by('-date_used')
+        return queryset
+
+
+class UserTarotDetailView(LoginRequiredMixin, DetailView):
+    model = tarot_model.UserCard
+    login_url = 'userportal/login/'
+    context_object_name = 'tarot_detail'
+    template_name = 'user_content/profile_tarot_detail.html'
+
+
+class UserTarotNoteUpdateView(LoginRequiredMixin, UpdateView):
+    model = tarot_model.UserCard
+    login_url = 'userportal/login/'
+    context_object_name = 'note_edit'
+    template_name = 'user_content/profile_tarot_note_edit.html'
+    fields = ('user_notes',)
