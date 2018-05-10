@@ -17,7 +17,7 @@
     <h4>Текуща информация за твоя профил</h4>
 
     {% for item in settings_list %}
-        <p style="margin-bottom: 10px; background-color: rgba(51,25,45,0.31)">Потребителско
+        <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Потребителско
             име: {{ item.user.username }}</p>
         {% if  item.user.first_name  != '' %}
             <p style="margin-bottom: 10px">Име: {{ item.user.first_name }}</p>
@@ -25,16 +25,16 @@
             <p style="margin-bottom: 10px">Име: Не е въведено</p>
         {% endif %}
         {% if  item.user.last_name  != '' %}
-            <p style="margin-bottom: 10px; background-color: rgba(51,25,45,0.31)">
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">
                 Фамилия: {{ item.user.last_name }}</p>
         {% else %}
-            <p style="margin-bottom: 10px; background-color: rgba(51,25,45,0.31)">Фамилия: Не е въведено</p>
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Фамилия: Не е въведено</p>
         {% endif %}
         <p style="margin-bottom: 10px">Email: {{ item.user.email }}</p>
         {% if  item.phone  != '' %}
-            <p style="margin-bottom: 10px; background-color: rgba(51,25,45,0.31)">Телефон: {{ item.phone }}</p>
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Телефон: {{ item.phone }}</p>
         {% else %}
-            <p style="margin-bottom: 10px; rgba(51,25,45,0.31)">Телефон: Не е въведено</p>
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Телефон: Не е въведено</p>
         {% endif %}
         {% if  item.birthday  != '' %}
             <p style="margin-bottom: 10px">Дата на раждане: {{ item.birthday }}</p>
@@ -42,10 +42,10 @@
             <p style="margin-bottom: 10px">Дата на раждане:: Не е въведено</p>
         {% endif %}
         {% if  item.hour_of_birth  != '' %}
-            <p style="margin-bottom: 10px; rgba(51,25,45,0.31)">Час на
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Час на
                 раждане: {{ item.hour_of_birth }}</p>
         {% else %}
-            <p style="margin-bottom: 10px; background-color: rgba(51,25,45,0.31)">Час на раждане:: Не е въведено</p>
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Час на раждане:: Не е въведено</p>
         {% endif %}
         {% if  item.city_of_birth  != '' %}
             <p style="margin-bottom: 10px">Град на раждане: {{ item.city_of_birth }}</p>
@@ -53,10 +53,10 @@
             <p style="margin-bottom: 10px">Град на раждане:: Не е въведено</p>
         {% endif %}
         {% if  item.country_of_birth  != '' %}
-            <p style="margin-bottom: 10px; rgba(51,25,45,0.31)">Държава на
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Държава на
                 раждане: {{ item.country_of_birth }}</p>
         {% else %}
-            <p style="margin-bottom: 10px; rgba(51,25,45,0.31))">Държава на раждане:: Не е
+            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Държава на раждане:: Не е
                 въведено</p>
         {% endif %}
     {% endfor %}
