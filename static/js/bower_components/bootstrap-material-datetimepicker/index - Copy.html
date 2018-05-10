@@ -11,7 +11,6 @@
 
 		<script src="https://code.jquery.com/jquery-1.12.3.min.js" integrity="sha256-aaODHAgvwQW1bFOGXMeX+pC4PZIPsvn2h1sArYOhgXQ=" crossorigin="anonymous"></script>
 		<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="https://rawgit.com/FezVrasta/bootstrap-material-design/master/dist/js/material.min.js"></script>
 		<script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
 		<script type="text/javascript" src="./js/bootstrap-material-datetimepicker.js"></script>
 
@@ -49,22 +48,7 @@
 				.well { margin : 0}
 			}
 		</style>
-		<script>
-			(function(i, s, o, g, r, a, m) {
-				i['GoogleAnalyticsObject'] = r;
-				i[r] = i[r] || function() {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o),
-					m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
 
-			ga('create', 'UA-60343429-1', 'auto');
-			ga('send', 'pageview');
-		</script>
 	</head>
 	<body>
 		<div class="container well">
@@ -122,36 +106,7 @@
 				shortTime: false,
 				format: 'HH:mm'
 			});
-
-			$('#date-format').bootstrapMaterialDatePicker
-			({
-				format: 'dddd DD MMMM YYYY - HH:mm'
-			});
-			$('#date-fr').bootstrapMaterialDatePicker
-			({
-				format: 'DD/MM/YYYY HH:mm',
-				lang: 'fr',
-				weekStart: 1,
-				cancelText : 'ANNULER',
-				nowButton : true,
-				switchOnClick : true
-			});
-
-			$('#date-end').bootstrapMaterialDatePicker
-			({
-				weekStart: 0, format: 'DD/MM/YYYY HH:mm'
-			});
-			$('#date-start').bootstrapMaterialDatePicker
-			({
-				weekStart: 0, format: 'DD/MM/YYYY HH:mm', shortTime : true
-			}).on('change', function(e, date)
-			{
-				$('#date-end').bootstrapMaterialDatePicker('setMinDate', date);
-			});
-
-			$('#min-date').bootstrapMaterialDatePicker({ format : 'DD/MM/YYYY HH:mm', minDate : new Date() });
-
-			$.material.init()
+			// $.material.init()
 		});
 		</script>
 	</body>

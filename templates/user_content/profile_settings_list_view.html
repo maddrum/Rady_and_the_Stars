@@ -4,6 +4,9 @@
 {% block profile_html_title %}
     Профил:настройки
 {% endblock %}
+{% block header_scripts_load %}
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+{% endblock %}
 {% block settings_menu %}
     class="active"
 {% endblock %}
@@ -14,57 +17,73 @@
 {% endblock %}
 {% block profile_content %}
 
-    <h4>Текуща информация за твоя профил</h4>
-
     {% for item in settings_list %}
-        <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Потребителско
-            име: {{ item.user.username }}</p>
-        {% if  item.user.first_name  != '' %}
-            <p style="margin-bottom: 10px">Име: {{ item.user.first_name }}</p>
-        {% else %}
-            <p style="margin-bottom: 10px">Име: Не е въведено</p>
-        {% endif %}
-        {% if  item.user.last_name  != '' %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">
-                Фамилия: {{ item.user.last_name }}</p>
-        {% else %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Фамилия: Не е въведено</p>
-        {% endif %}
-        <p style="margin-bottom: 10px">Email: {{ item.user.email }}</p>
-        {% if  item.phone  != '' %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Телефон: {{ item.phone }}</p>
-        {% else %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Телефон: Не е въведено</p>
-        {% endif %}
-        {% if  item.birthday  != '' %}
-            <p style="margin-bottom: 10px">Дата на раждане: {{ item.birthday }}</p>
-        {% else %}
-            <p style="margin-bottom: 10px">Дата на раждане:: Не е въведено</p>
-        {% endif %}
-        {% if  item.hour_of_birth  != '' %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Час на
-                раждане: {{ item.hour_of_birth }}</p>
-        {% else %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Час на раждане:: Не е въведено</p>
-        {% endif %}
-        {% if  item.city_of_birth  != '' %}
-            <p style="margin-bottom: 10px">Град на раждане: {{ item.city_of_birth }}</p>
-        {% else %}
-            <p style="margin-bottom: 10px">Град на раждане:: Не е въведено</p>
-        {% endif %}
-        {% if  item.country_of_birth  != '' %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Държава на
-                раждане: {{ item.country_of_birth }}</p>
-        {% else %}
-            <p style="margin-bottom: 10px; background-color: rgba(31,15,22,0.13)">Държава на раждане:: Не е
-                въведено</p>
-        {% endif %}
+        <div id="accordion">
+            <h3 style="margin-bottom: 10px">Основни настройки</h3>
+            <div class="box">
+                <p style="margin-bottom: 10px">Потребителско
+                    име: {{ item.user.username }}</p>
+                {% if  item.user.first_name  != '' %}
+                    <p style="margin-bottom: 10px;">
+                        Име: {{ item.user.first_name }}</p>
+                {% else %}
+                    <p style="margin-bottom: 10px">Име: Не е въведено</p>
+                {% endif %}
+                {% if  item.user.last_name  != '' %}
+                    <p style="margin-bottom: 10px">
+                        Фамилия: {{ item.user.last_name }}</p>
+                {% else %}
+                    <p style="margin-bottom: 10px">Фамилия: Не е въведено</p>
+                {% endif %}
+                <p style=" margin-bottom: 10px">Email: {{ item.user.email }}</p>
+                <br>
+                <ul class="actions">
+                    <li><a href="{% url 'user_content:main_settings' %}"
+                           class="button fit">Редактирай</a></li>
+                </ul>
+            </div>
+            <h3>Допълнителни настройки</h3>
+            <div class="box">
+                {% if  item.phone  != '' %}
+                    <p style="margin-bottom: 10px">Телефон: {{ item.phone }}</p>
+                {% else %}
+                    <p style="margin-bottom: 10px">Телефон: Не е въведено</p>
+                {% endif %}
+                {% if  item.birthday  != None %}
+                    <p style="margin-bottom: 10px">Дата на раждане: {{ item.birthday }}</p>
+                {% else %}
+                    <p style="margin-bottom: 10px">Дата на раждане: Не е въведено</p>
+                {% endif %}
+                {% if  item.hour_of_birth  != None %}
+                    <p style="margin-bottom: 10px">Час на
+                        раждане: {{ item.hour_of_birth }}</p>
+                {% else %}
+                    <p style="margin-bottom: 10px">Час на раждане: Не е въведено</p>
+                {% endif %}
+                {% if  item.city_of_birth  != '' %}
+                    <p style="margin-bottom: 10px">Град на раждане: {{ item.city_of_birth }}</p>
+                {% else %}
+                    <p style="margin-bottom: 10px">Град на раждане: Не е въведено</p>
+                {% endif %}
+                {% if  item.country_of_birth  != '' %}
+                    <p style="margin-bottom: 10px">Държава на
+                        раждане: {{ item.country_of_birth }}</p>
+                {% else %}
+                    <p style="margin-bottom: 10px">Държава на раждане: Не е
+                        въведено</p>
+                {% endif %}
+                <br>
+                <ul class="actions">
+                    <li><a href="{% url 'user_content:extra_settings' %}"
+                           class="button fit">Редактирай</a></li>
+                </ul>
+            </div>
+        </div>
+
     {% endfor %}
-    <br>
-    <ul class="actions">
-        <li><a href="#"
-               class="button special">Редактирай!</a></li>
-    </ul>
+    <script>
+        $("#accordion").accordion();
+    </script>
 
 {% endblock %}
 

@@ -21,6 +21,10 @@ class SiteUser(models.Model):
     def get_absolute_url(self):
         return reverse('user_content:profile')
 
+    def null_writer(self, logged_user_id):
+        self.user_id = logged_user_id
+        self.save()
+
 
 class TextsForUser(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)

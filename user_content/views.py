@@ -6,6 +6,8 @@ from user_content.forms import SiteUserCreateForm
 from user_content import models
 from tarot_of_the_day import models as tarot_model
 from django.urls import reverse_lazy
+from user_content.forms import UserRegisterExtraDataForm, UserMainDataForm
+from django.contrib.auth import get_user_model
 
 
 # Create your views here.
@@ -15,19 +17,24 @@ class UserRegister(CreateView):
     template_name = 'user_content/register.html'
 
 
-class Index(LoginRequiredMixin, TemplateView):
-    template_name = 'user_content/index.html'
+@login_required
+def Index(request):
+    username = request.user
+    user_id = username.id
+    user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
+    if not user_extra_info:
+        models.SiteUser().null_writer(logged_user_id=user_id)
+    return render(request, 'user_content/index.html')
 
 
 @login_required
 def user_profile_view(request):
     username = request.user
     user_main_profile = models.User.objects.filter(username=username)
-    try:
-        user_id = user_main_profile.values_list('id')[0][0]
-    except IndexError:
-        return redirect('index')
+    user_id = username.id
     user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
+    if not user_extra_info:
+        models.SiteUser().null_writer(logged_user_id=user_id)
     data_dict = {
         'main_info': user_main_profile,
         'extra_info': user_extra_info,
@@ -91,4 +98,32 @@ class UserSettingsListView(LoginRequiredMixin, ListView):
         queryset = super(UserSettingsListView, self).get_queryset()
         user_id = self.request.user.id
         queryset = queryset.filter(user_id=user_id)
+        return queryset
+
+
+class UserExtraSettingsUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'userportal/login/'
+    model = models.SiteUser
+    form_class = UserRegisterExtraDataForm
+    context_object_name = 'user_settings'
+    template_name = 'user_content/profile_settings_update_view.html'
+    success_url = '/userportal/settings/'
+
+    def get_object(self, queryset=None):
+        username_id = self.request.user.id
+        queryset = models.SiteUser.objects.get(user_id=username_id)
+        return queryset
+
+
+class UserMainSettingsUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'userportal/login/'
+    model = get_user_model()
+    form_class = UserMainDataForm
+    context_object_name = 'user_settings'
+    template_name = 'user_content/profile_settings_update_view.html'
+    success_url = '/userportal/settings/'
+
+    def get_object(self, queryset=None):
+        username_id = self.request.user.id
+        queryset = self.model.objects.get(id=username_id)
         return queryset

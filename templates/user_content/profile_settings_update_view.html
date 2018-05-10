@@ -1,0 +1,55 @@
+<!doctype html>
+{% extends 'user_content/profile_base.html' %}
+{% load staticfiles %}
+{% block profile_html_title %}
+    Профил:настройки
+{% endblock %}
+
+{% block header_scripts_load %}
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://momentjs.com/downloads/moment-with-locales.min.js"></script>
+    <script type="text/javascript"
+            src="{% static 'js/bower_components/bootstrap-material-datetimepicker/js/bootstrap-material-datetimepicker.js' %}"></script>
+{% endblock %}
+{% block settings_menu %}
+    class="active"
+{% endblock %}
+
+
+{% block page_title %}
+    твоят профил - настройки
+{% endblock %}
+{% block profile_content %}
+
+    <div class="box">
+        <form method="POST">
+            {{ form.as_p }}
+
+            {% csrf_token %}
+            <input type="submit" value="Изпрати">
+
+        </form>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#id_birthday').bootstrapMaterialDatePicker
+            ({
+                weekStart: 1,
+                time: false,
+                clearButton: true
+            });
+
+            $('#id_hour_of_birth').bootstrapMaterialDatePicker
+            ({
+                date: false,
+                shortTime: false,
+                format: 'HH:mm'
+            });
+        })
+
+    </script>
+
+
+{% endblock %}
+

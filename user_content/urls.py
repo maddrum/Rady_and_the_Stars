@@ -5,7 +5,7 @@ app_name = 'user_content'
 
 urlpatterns = [
     url(r'register/', views.UserRegister.as_view(), name="register"),
-    url(r'index/', views.Index.as_view(), name='index'),
+    url(r'index/', views.Index, name='index'),
     url(r'profile/', views.user_profile_view, name='profile'),
     url(r'horoscope_list/', views.UserHoroscopesListView.as_view(), name="horoscope_list"),
     url(r'detail_text(?P<pk>\d+)/', views.UserHoroscopesDetailView.as_view(), name="detail"),
@@ -15,5 +15,6 @@ urlpatterns = [
     url(r'daily_tarot_detail(?P<pk>\d+)', views.UserTarotDetailView.as_view(), name='profile_tarot_detail'),
     url(r'daily_tarot_note_edit(?P<pk>\d+)', views.UserTarotNoteUpdateView.as_view(), name='profile__tarot_note_edit'),
     url(r'settings/', views.UserSettingsListView.as_view(), name='settings'),
-    # url(r'main_settings/', views.MainUserSettingsUpdateView.as_view(), name='main_settings'),
+    url(r'extra_settings_edit', views.UserExtraSettingsUpdateView.as_view(), name='extra_settings'),
+    url(r'main_settings_edit',views.UserMainSettingsUpdateView.as_view(),name='main_settings'),
 ]
