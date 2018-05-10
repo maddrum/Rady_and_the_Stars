@@ -1,45 +1,26 @@
 <!doctype html>
-{% extends 'base.html' %}
+{% extends 'user_content/profile_base.html' %}
 {% load staticfiles %}
-{% block page_title %}
-    твоят профил - Твоите хороскопи
+{% block profile_html_title %}
+    Профил:Хороскопи
 {% endblock %}
-{% block body_contents %}
+{% block horoscopes_menu %}
+    class="active"
+{% endblock %}
 
 
-    <div id="w">
-        <div id="content" class="clearfix">
-            <div id="userphoto"><img src="{% static 'images/avatar.png' %}" alt="default avatar"></div>
-            <nav id="profiletabs">
-                <ul class="clearfix">
-                    <li><a href="{% url 'user_content:profile' %}">Инфо</a></li>
-                    <li><a href={% url 'user_content:settings' %}> Настройки</a></li>
-                    <li><a href="{% url 'user_content:horoscope_list' %}" class="sel">Хороскопи</a></li>
-                </ul>
-            </nav>
-            <div class="container">
-                <br>
-                <div class="container">
-                    <br>
-                    <ul>
-                        <h2>Това са нещата написани за теб:</h2>
-                        {% for item in horoscopes_list %}
-                            <li><a href="/userportal/detail_text{{ item.id }}">{{ item.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                </div>
+{% block page_title %}
+    твоят профил - хороскопи
+{% endblock %}
+{% block profile_content %}
 
-
-            </div>
-
-        </div>
-    </div>
-
-
-
-
-
+    <h3>Твоите хороскопи:</h3>
+    <ul>
+        {% for item in horoscopes_list %}
+            <li><a href="/userportal/detail_text{{ item.id }}">{{ item.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
 
 {% endblock %}
 

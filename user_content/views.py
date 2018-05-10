@@ -32,7 +32,7 @@ def user_profile_view(request):
         'main_info': user_main_profile,
         'extra_info': user_extra_info,
     }
-    return render(request, 'user_content/profile.html', data_dict)
+    return render(request, 'user_content/profile_home.html', data_dict)
 
 
 class UserHoroscopesListView(LoginRequiredMixin, ListView):
@@ -53,26 +53,6 @@ class UserHoroscopesDetailView(LoginRequiredMixin, DetailView):
     login_url = 'userportal/login/'
     context_object_name = 'horoscopes_detail'
     template_name = 'user_content/profile_horoscope_detail_view.html'
-
-
-class MainUserSettingsUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = 'userportal/login/'
-    model = models.User
-    template_name = 'user_content/profile_main_settings_update.html'
-    fields = ('email,first_name,last_name')
-
-
-class ExtraUserSettingsUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = 'userportal/login/'
-    model = models.SiteUser
-    template_name = 'user_content/profile_extra_settings_update.html'
-    context_object_name = 'extra_info'
-    fields = ('birthday', 'phone', 'city_of_birth')
-
-    def get_object(self, queryset=None):
-        username = self.request.user
-        queryset = models.SiteUser.objects.get(user=username)
-        return queryset
 
 
 class UserTarotListView(LoginRequiredMixin, ListView):
@@ -100,3 +80,15 @@ class UserTarotNoteUpdateView(LoginRequiredMixin, UpdateView):
     context_object_name = 'note_edit'
     template_name = 'user_content/profile_tarot_note_edit.html'
     fields = ('user_notes',)
+
+
+class UserSettingsListView(LoginRequiredMixin, ListView):
+    model = models.SiteUser
+    context_object_name = 'settings_list'
+    template_name = 'user_content/profile_settings_list_view.html'
+
+    def get_queryset(self):
+        queryset = super(UserSettingsListView, self).get_queryset()
+        user_id = self.request.user.id
+        queryset = queryset.filter(user_id=user_id)
+        return queryset

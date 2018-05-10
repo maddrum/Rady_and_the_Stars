@@ -6,7 +6,7 @@ from django.urls import reverse
 # Create your models here.
 class SiteUser(models.Model):
     # Описва съдържанието на отделен юзър
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_data')
     birthday = models.DateField(blank=True, null=True)
     hour_of_birth = models.TimeField(blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True)

@@ -1,37 +1,26 @@
 <!doctype html>
-{% extends 'base.html' %}
+{% extends 'user_content/profile_base.html' %}
 {% load staticfiles %}
-{% block page_title %}
-    {{ horoscopes_detail.title }}
+{% block profile_html_title %}
+    Профил:Хороскопи
 {% endblock %}
-{% block body_contents %}
+{% block horoscopes_menu %}
+    class="active"
+{% endblock %}
 
 
-    <div id="w">
-        <div id="content" class="clearfix" align="justify">
+{% block page_title %}
+    твоят профил - хороскопи
+{% endblock %}
+{% block profile_content %}
 
-            <div id="userphoto"><img src="{% static 'images/avatar.png' %}" alt="default avatar"></div>
-            <nav id="profiletabs">
-                <ul class="clearfix">
-                    <li><a href="{% url 'user_content:profile' %}">Инфо</a></li>
-                    <li><a href="{% url 'user_content:settings' %}"> Настройки</a></li>
-                    <li><a href="{% url 'user_content:horoscope_list' %}" class="sel">Хороскопи</a></li>
-                </ul>
-            </nav>
-            <br><br>
-            <h2>{{ horoscopes_detail.title }}</h2>
-            <br>
+    <h2>{{ horoscopes_detail.title }}</h2>
 
-            {{ horoscopes_detail.article_text }}
-
-
-        </div>
-    </div>
-
-
-
-
-
+    <p style="text-align: justify">{{ horoscopes_detail.article_text }}</p>
+    <ul class="actions">
+        <li><a href="{% url 'user_content:horoscope_list' %}"
+               class="button">Обратно</a></li>
+    </ul>
 
 
 {% endblock %}

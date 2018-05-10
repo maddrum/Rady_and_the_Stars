@@ -1,0 +1,38 @@
+{% extends 'user_content/profile_base.html' %}
+{% load staticfiles %}
+{% block profile_html_title %}
+    Профил
+{% endblock %}
+{% block home_menu %}class="active"{% endblock %}
+{% block  profile_content %}
+
+    {% for item in main_info %}
+        <h3>Здравей, {{ item.username }}!</h3>
+        <p>Това е твоята профилна страница. От тук можеш да:</p>
+        <ul>
+            <li>Променяш своите данни</li>
+            <li>Да прочетеш хороскопи, които съм написала за теб</li>
+            <li>Да гледаш видео от лекции, за курсове които си посещавал</li>
+            <li>Да прегледаш всички Таро карти за деня, които си изтеглил</li>
+        </ul>
+
+        Евентуално поръчки... и тн<br><br>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin a diam egestas, mattis lacus
+        euismod, finibus elit. Pellentesque nulla nunc, sodales id risus vel, sodales rutrum enim.
+        Nullam vitae sagittis odio. Praesent tempus cursus lectus, vitae ultrices massa fermentum
+        non. Curabitur congue nibh ut convallis tincidunt. Pellentesque habitant morbi tristique
+        senectus et netus et malesuada fames ac turpis egestas. Aliquam sed cursus urna. Cras lectus
+        urna, mattis ut tellus sit amet, vulputate tincidunt erat. Pellentesque tincidunt ipsum sed
+        nibh molestie, non elementum urna dignissim. Fusce tempor elementum justo vitae vehicula.
+        Cras ac vehicula nisi. Cras vitae placerat dolor. Nullam suscipit leo vitae nulla malesuada,
+        quis interdum nunc varius. Mauris rhoncus nisi nec lorem convallis, id placerat ante
+        suscipit. Suspendisse vitae urna ex.
+
+        Vivamus in ultricies leo, non viverra purus. Aliquam sed cursus nunc. Nulla eu varius nulla.
+        In hac habitasse platea dictumst. Proin cursus tellus nec quam aliquam euismod. Maecenas non
+        ante vel sem condimentum tempor a sed eros. Aenean ultricies non ante id mollis.
+    {% endfor %}
+
+
+{% endblock %}
+
