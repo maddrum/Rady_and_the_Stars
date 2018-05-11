@@ -23,6 +23,8 @@
             <div class="box">
                 <p style="margin-bottom: 10px">Потребителско
                     име: {{ item.user.username }}</p>
+                <p style="margin-bottom: 10px">Парола: <a href="{% url 'user_content:password_change' %}">[Промени
+                    парола]</a></p>
                 {% if  item.user.first_name  != '' %}
                     <p style="margin-bottom: 10px;">
                         Име: {{ item.user.first_name }}</p>
@@ -37,6 +39,7 @@
                 {% endif %}
                 <p style=" margin-bottom: 10px">Email: {{ item.user.email }}</p>
                 <br>
+
                 <ul class="actions">
                     <li><a href="{% url 'user_content:main_settings' %}"
                            class="button fit">Редактирай</a></li>

@@ -1,5 +1,6 @@
 from django.conf.urls import url, include
 from user_content import views
+from django.contrib.auth.views import PasswordChangeView
 
 app_name = 'user_content'
 
@@ -16,5 +17,9 @@ urlpatterns = [
     url(r'daily_tarot_note_edit(?P<pk>\d+)', views.UserTarotNoteUpdateView.as_view(), name='profile__tarot_note_edit'),
     url(r'settings/', views.UserSettingsListView.as_view(), name='settings'),
     url(r'extra_settings_edit', views.UserExtraSettingsUpdateView.as_view(), name='extra_settings'),
-    url(r'main_settings_edit',views.UserMainSettingsUpdateView.as_view(),name='main_settings'),
+    url(r'main_settings_edit', views.UserMainSettingsUpdateView.as_view(), name='main_settings'),
+    url(r'password_change',
+        PasswordChangeView.as_view(template_name='user_content/profile_settings_password_change.html',
+                                   success_url='/login/'),
+        name='password_change')
 ]

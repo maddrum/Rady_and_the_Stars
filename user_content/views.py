@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView, ListView, UpdateView, TemplateView, CreateView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView
 from user_content.forms import SiteUserCreateForm
 from user_content import models
 from tarot_of_the_day import models as tarot_model
@@ -43,7 +43,7 @@ def user_profile_view(request):
 
 
 class UserHoroscopesListView(LoginRequiredMixin, ListView):
-    login_url = 'userportal/login/'
+    login_url = '/login/'
     model = models.TextsForUser
     context_object_name = 'horoscopes_list'
     template_name = "user_content/profile_horoscope_list_view.html"
@@ -57,12 +57,13 @@ class UserHoroscopesListView(LoginRequiredMixin, ListView):
 
 class UserHoroscopesDetailView(LoginRequiredMixin, DetailView):
     model = models.TextsForUser
-    login_url = 'userportal/login/'
+    login_url = '/login/'
     context_object_name = 'horoscopes_detail'
     template_name = 'user_content/profile_horoscope_detail_view.html'
 
 
 class UserTarotListView(LoginRequiredMixin, ListView):
+    login_url = '/login/'
     model = tarot_model.UserCard
     context_object_name = 'tarot_list'
     template_name = 'user_content/profile_tarot_list.html'
@@ -76,14 +77,14 @@ class UserTarotListView(LoginRequiredMixin, ListView):
 
 class UserTarotDetailView(LoginRequiredMixin, DetailView):
     model = tarot_model.UserCard
-    login_url = 'userportal/login/'
+    login_url = '/login/'
     context_object_name = 'tarot_detail'
     template_name = 'user_content/profile_tarot_detail.html'
 
 
 class UserTarotNoteUpdateView(LoginRequiredMixin, UpdateView):
     model = tarot_model.UserCard
-    login_url = 'userportal/login/'
+    login_url = '/login/'
     context_object_name = 'note_edit'
     template_name = 'user_content/profile_tarot_note_edit.html'
     fields = ('user_notes',)
@@ -102,7 +103,7 @@ class UserSettingsListView(LoginRequiredMixin, ListView):
 
 
 class UserExtraSettingsUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = 'userportal/login/'
+    login_url = '/login/'
     model = models.SiteUser
     form_class = UserRegisterExtraDataForm
     context_object_name = 'user_settings'
@@ -116,7 +117,7 @@ class UserExtraSettingsUpdateView(LoginRequiredMixin, UpdateView):
 
 
 class UserMainSettingsUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = 'userportal/login/'
+    login_url = '/login/'
     model = get_user_model()
     form_class = UserMainDataForm
     context_object_name = 'user_settings'
