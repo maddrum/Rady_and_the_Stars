@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import DetailView, ListView, UpdateView, CreateView
-from user_content.forms import SiteUserCreateForm
+from user_content.forms import SiteUserCreateForm, UserUploadPic
 from user_content import models
 from tarot_of_the_day import models as tarot_model
 from django.urls import reverse_lazy
@@ -128,3 +128,27 @@ class UserMainSettingsUpdateView(LoginRequiredMixin, UpdateView):
         username_id = self.request.user.id
         queryset = self.model.objects.get(id=username_id)
         return queryset
+
+
+@login_required
+def profile_pic_upload(request):
+    user_id = request.user.id
+    print(user_id)
+    content_dict = {}
+
+    # TODO CRITERIAS FOR UPLOAD!
+    # content_dict['criteria'] = False
+
+    file_form = UserUploadPic()
+    content_dict['form'] = file_form
+    if request.method == "POST":
+        file_form = UserUploadPic(request.POST)
+        if file_form.is_valid():
+            if 'profile_pic' in request.FILES:
+                models.SiteUser().delete_profile_pic(logged_user_id=user_id)
+                uploaded_pic = request.FILES['profile_pic']
+                extra_profile_info = models.SiteUser.objects.get(user_id=user_id)
+                extra_profile_info.profile_pic = uploaded_pic
+                extra_profile_info.save()
+        return redirect('user_site:profile')
+    return render(request, 'user_content/profile_profile_picture.html', content_dict)

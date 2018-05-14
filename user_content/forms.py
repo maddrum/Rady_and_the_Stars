@@ -39,3 +39,8 @@ class UserMainDataForm(models.ModelForm):
         fields = ('email', 'first_name', 'last_name',)
 
 
+class UserUploadPic(models.ModelForm):
+    class Meta:
+        model = SiteUser
+        fields = ('profile_pic',)
+        labels = {'profile_pic': 'Избери профилна снимка от твоят компютър'}

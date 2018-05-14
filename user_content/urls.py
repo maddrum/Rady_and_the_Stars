@@ -21,5 +21,6 @@ urlpatterns = [
     url(r'password_change',
         PasswordChangeView.as_view(template_name='user_content/profile_settings_password_change.html',
                                    success_url='/login/'),
-        name='password_change')
+        name='password_change'),
+    url(r'change_avatar', views.profile_pic_upload, name='profile_pic'),
 ]

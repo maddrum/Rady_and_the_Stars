@@ -1,0 +1,36 @@
+{% extends 'user_content/profile_base.html' %}
+{% load staticfiles %}
+{% block profile_html_title %}
+    Профил:настройки
+{% endblock %}
+
+{% block settings_menu %}
+    class="active"
+{% endblock %}
+
+
+{% block page_title %}
+    твоят профил - настройки
+{% endblock %}
+{% block profile_content %}
+
+
+    <div class="box">
+        <h4>Изисквания за профилната снимка:</h4>
+        <ul>
+            <li>Да не е по-голяма от 2 MB</li>
+            <li>Минимален размер: 50x50</li>
+            <li>Препоръчеителен размер: 150x150</li>
+
+        </ul>
+        <form enctype="multipart/form-data" method="POST">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <input type="submit" value="Изпрати">
+
+        </form>
+    </div>
+
+
+{% endblock %}
+

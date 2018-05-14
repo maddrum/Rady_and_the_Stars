@@ -1,9 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+import os
+from django.contrib.auth import get_user_model
 
 
 # Create your models here.
+def path_and_rename(instance, filename):
+    user_id = instance.user_id
+    upload_to = 'profile_pics'
+    filename = f'{user_id}_profile_pic.png'
+    return os.path.join(upload_to, filename)
+
+
 class SiteUser(models.Model):
     # Описва съдържанието на отделен юзър
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user_data')
@@ -11,7 +20,7 @@ class SiteUser(models.Model):
     hour_of_birth = models.TimeField(blank=True, null=True)
     phone = models.CharField(max_length=50, blank=True)
     used_service = models.BooleanField(choices=((True, "Да"), (False, "Не")), default=False)
-    profile_pic = models.ImageField(upload_to='profile_pics', blank=True)
+    profile_pic = models.ImageField(upload_to=path_and_rename, blank=True)
     city_of_birth = models.CharField(max_length=250, blank=True)
     country_of_birth = models.CharField(max_length=250, blank=True)
 
@@ -24,6 +33,17 @@ class SiteUser(models.Model):
     def null_writer(self, logged_user_id):
         self.user_id = logged_user_id
         self.save()
+
+    def delete_profile_pic(self, logged_user_id):
+        filename = f'{logged_user_id}_profile_pic.png'
+        print(filename)
+        current_dir = os.getcwd()
+        media_folder = os.path.join(current_dir, 'media', 'profile_pics')
+        os.chdir(media_folder)
+        if os.path.exists(filename):
+            print('check')
+            os.remove(filename)
+        os.chdir(current_dir)
 
 
 class TextsForUser(models.Model):

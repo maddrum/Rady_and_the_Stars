@@ -26,15 +26,16 @@
                 <div class="profile-sidebar">
                     <!-- SIDEBAR USERPIC -->
                     <div class="profile-userpic">
-                        <img src="/media/avatar.png"
-                             class="img-responsive" alt="No media">
+                        <img src="/media/profile_pics/{{ user.id }}_profile_pic.png"
+                             class="img-responsive" alt="Няма качен">
                     </div>
                     <!-- END SIDEBAR USERPIC -->
                     <!-- SIDEBAR USER TITLE -->
                     <div class="profile-usertitle">
                         <div class="profile-usertitle-name">
                             {{ user }}
-                            <p style="margin-top: 12px"><a class="button" href="#" style="font-size: 12px"><i
+                            <p style="margin-top: 12px"><a class="button" href="{% url 'user_content:profile_pic' %}"
+                                                           style="font-size: 12px"><i
                                     class="glyphicon glyphicon-picture"></i> [качи снимка] </a></p>
                         </div>
                     </div>
