@@ -28,6 +28,7 @@ urlpatterns = [
                   url(r'login/', login_view.LoginView.as_view(template_name='user_content/login.html'),
                       name='user_login'),
                   url(r'logout/', login_view.logout, name="logout", kwargs={'next_page': 'index'}),
+                  url(r'password_reset', login_view.PasswordResetView, name='password_reset'),
                   url(r'admin/', admin.site.urls),
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 if settings.DEBUG:

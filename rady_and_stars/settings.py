@@ -135,3 +135,10 @@ MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/userportal/index'
 INTERNAL_IPS = ['127.0.0.1']
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com’'
+EMAIL_HOST_USER = 'maddrum.test@gmail.com'
+EMAIL_HOST_PASSWORD = 'testpassword123'
+EMAIL_PORT = 465
+EMAIL_USE_TLS = True

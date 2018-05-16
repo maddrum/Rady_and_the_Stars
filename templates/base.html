@@ -54,6 +54,7 @@
             {% for item,value in site_menu.items %}
                 <li><a href="/site/{{ value.1 }}">{{ value.0 }}</a></li>
             {% endfor %}
+            <li><a href="{% url 'user_content:register' %}">Регистрирай се</a></li>
         {% endif %}
 
     </ul>

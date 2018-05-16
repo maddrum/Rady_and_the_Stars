@@ -8,6 +8,9 @@
         <p style="font-size: 15pt"> Нямаш регистрация??! -
             <a href="{% url 'user_content:register' %}">Регистрирай се</a>
         </p>
+        <p style="font-size: 15pt"> Забравена парола ??! -
+            <a href="{% url 'user_content:register' %}">Натиснете тук</a>
+        </p>
         {% if form.errors %}
             <p>Невалидни данни за вход. Моля, опитайте отново!</p>
         {% endif %}
@@ -17,6 +20,8 @@
             <input type="submit" value="Влез">
             <input type="hidden" name="next" value="{{ next }}">
         </form>
+
+
     </div>
 
 
