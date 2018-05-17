@@ -47,14 +47,13 @@
         {% if user.is_authenticated %}
             {% return_menu_items "logged" as site_menu %}
             {% for item,value in site_menu.items %}
-                <li><a href="/userportal/{{ value.1 }}">{{ value.0 }}</a></li>
+                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>
             {% endfor %}
         {% else %}
             {% return_menu_items "not_logged" as site_menu %}
             {% for item,value in site_menu.items %}
-                <li><a href="/site/{{ value.1 }}">{{ value.0 }}</a></li>
+                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>
             {% endfor %}
-            <li><a href="{% url 'user_content:register' %}">Регистрирай се</a></li>
         {% endif %}
 
     </ul>
@@ -67,7 +66,6 @@
             <p>
                 {% block page_title %}{% endblock %}
             </p>
-
             <h2>Rady and the Stars</h2>
         </header>
     </div>

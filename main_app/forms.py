@@ -9,13 +9,13 @@ class SiteContactsForm(models.ModelForm):
         fields = ('names', 'email', 'phone', 'message')
         widgets = {
             'names': forms.TextInput(attrs={
-                'placeholder': '*Моля въведете Вашите имена*',
+                'placeholder': '*Имена*',
             }),
             'email': forms.TextInput(attrs={
-                'placeholder': 'Моля, въведете Вашият email',
+                'placeholder': 'Еmail',
             }),
             'phone': forms.TextInput(attrs={
-                'placeholder': '*Моля въведете Вашият телефон*',
+                'placeholder': '*Tелефон*',
             }),
             'message': forms.widgets.Textarea(attrs={
                 'placeholder': '*Моля въведете Вашите въпрос*',
@@ -30,14 +30,14 @@ class SiteOrderForm(models.ModelForm):
         fields = ('names', 'email', 'phone', 'service_requested', 'add_info')
         widgets = {
             'names': forms.TextInput(attrs={
-                'placeholder': '*Моля въведете Вашите имена*',
+                'placeholder': '*Имена*',
 
             }),
             'email': forms.TextInput(attrs={
-                'placeholder': 'Моля, въведете Вашият email',
+                'placeholder': 'Email',
             }),
             'phone': forms.TextInput(attrs={
-                'placeholder': '*Моля въведете Вашият телефон*',
+                'placeholder': '*Телефон*',
             }),
             'add_info': forms.widgets.Textarea(attrs={
                 'placeholder': 'Допълнителни указания',

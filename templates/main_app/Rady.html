@@ -11,7 +11,7 @@
                         <p>Твоят личен астролог</p>
                         <h2>Ради</h2>
                     </header>
-                     <div class="image fit">
+                    <div class="image fit">
                         <img src="{% static 'images/rady.jpg' %}" alt=""/>
                     </div>
                     <h4 align=center>зодия Скорпион, с асцендент Водолей и Луна в Козирог</h4>
@@ -152,7 +152,7 @@
         <div class="inner">
             <header class="align-center">
                 <p>Твоят личен астролог</p>
-                <h2><a href="contacts.html">Свържи се с мен</a></h2>
+                <h2><a href="{% url 'main_app:contacts' %}">Свържи се с мен</a></h2>
             </header>
         </div>
     </section>
