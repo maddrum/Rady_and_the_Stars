@@ -22,41 +22,88 @@
 <body>
 
 <!-- Header -->
-<header id="header">
-    {#<header id="header" class="alt"> за индекса само!#}
-    {% if user.is_authenticated %}
-        <div class="logo"><a href="{% url 'user_content:index' %}">Rady <span>and the Stars</span></a>
-    {% else %}
-        <div class="logo"><a href="{% url 'index' %}">Rady <span>and the Stars</span></a>
-    {% endif %}
-    </div>
-    {% if user.is_staff %}
-        <a href="../admin">АДМИН</a>
-    {% endif %}
-    {% if user.is_authenticated %}
-        <a href={% url 'logout' %}>Излез</a>
-    {% else %}
-        <a href="{% url 'user_login' %}">ВХОД</a>
-    {% endif %}
-    <a href="#menu">МЕНЮ</a>
-</header>
 
-<!-- Nav -->
-<nav id="menu">
-    <ul class="links">
+<header id="headermenu">
+
+    <div class="inner">
+
         {% if user.is_authenticated %}
-            {% return_menu_items "logged" as site_menu %}
-            {% for item,value in site_menu.items %}
-                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>
-            {% endfor %}
+            <a href="{% url 'user_content:index' %}" class="logo">Rady and the Stars</a>
         {% else %}
-            {% return_menu_items "not_logged" as site_menu %}
-            {% for item,value in site_menu.items %}
-                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>
-            {% endfor %}
+            <a href="{% url 'index' %}" class="logo">Rady and the Stars</a>
         {% endif %}
-    </ul>
-</nav>
+
+
+        <nav id="nav">
+
+            {% if user.is_authenticated %}
+                {% return_menu_items "logged" as site_menu %}
+                {% for item,value in site_menu.items %}
+                    <a href="../{{ value.1 }}">{{ value.0 }}</a>
+                {% endfor %}
+            {% else %}
+                {% return_menu_items "not_logged" as site_menu %}
+                {% for item,value in site_menu.items %}
+                    <a href="../{{ value.1 }}">{{ value.0 }}</a>
+                {% endfor %}
+            {% endif %}
+
+
+            {% if user.is_staff %}
+                <a href="../admin">АДМИН</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+                <a href={% url 'logout' %}>Излез</a>
+            {% else %}
+                <a href="{% url 'user_login' %}">ВХОД</a>
+            {% endif %}
+
+
+        </nav>
+    </div>
+    </div>
+</header>
+<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+
+{#Menu - hidden#}
+
+{#<header id="header">#}
+{#<header id="header" class="alt"> за индекса само!#}
+{#    {% if user.is_authenticated %}#}
+{#        <div class="logo"><a href="{% url 'user_content:index' %}">Rady <span>and the Stars</span></a>#}
+{#    {% else %}#}
+{#        <div class="logo"><a href="{% url 'index' %}">Rady <span>and the Stars</span></a>#}
+{#    {% endif %}#}
+{#    </div>#}
+{#    {% if user.is_staff %}#}
+{#        <a href="../admin">АДМИН</a>#}
+{#    {% endif %}#}
+{#    {% if user.is_authenticated %}#}
+{#        <a href={% url 'logout' %}>Излез</a>#}
+{#    {% else %}#}
+{#        <a href="{% url 'user_login' %}">ВХОД</a>#}
+{#    {% endif %}#}
+{#    <a href="#menu">МЕНЮ</a>#}
+{#</header>#}
+{##}
+{#<!-- Nav -->#}
+{#<nav id="menu">#}
+{#    <ul class="links">#}
+{#        {% if user.is_authenticated %}#}
+{#            {% return_menu_items "logged" as site_menu %}#}
+{#            {% for item,value in site_menu.items %}#}
+{#                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>#}
+{#            {% endfor %}#}
+{#        {% else %}#}
+{#            {% return_menu_items "not_logged" as site_menu %}#}
+{#            {% for item,value in site_menu.items %}#}
+{#                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>#}
+{#            {% endfor %}#}
+{#        {% endif %}#}
+{#    </ul>#}
+{#</nav>#}
+
 
 <section id="One" class="wrapper style3">
     <div class="inner">
@@ -98,6 +145,7 @@
 <script src="{% static 'js/skel.min.js' %}"></script>
 <script src="{% static '/js/util.js' %}"></script>
 <script src="{% static '/js/main.js' %}"></script>
+<script src="{% static '/js/main_static_menu.js' %}"></script>
 
 
 </body>

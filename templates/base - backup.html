@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+{% load staticfiles %}
+{% load custom_tags %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    {% block html_title_and_links %}
+        <!--<title>&#9733;&#9734;Rady and the Stars&#9734;&#9733; </title>-->
+    {% endblock %}
+    {% block header_link_load %}{% endblock %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}"/>
+
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous">
+    </script>
+    {% block header_scripts_load %}
+    {% endblock %}
+</head>
+<body>
+
+<!-- Header -->
+<header id="header">
+    {#<header id="header" class="alt"> за индекса само!#}
+    {% if user.is_authenticated %}
+        <div class="logo"><a href="{% url 'user_content:index' %}">Rady <span>and the Stars</span></a>
+    {% else %}
+        <div class="logo"><a href="{% url 'index' %}">Rady <span>and the Stars</span></a>
+    {% endif %}
+    </div>
+    {% if user.is_staff %}
+        <a href="../admin">АДМИН</a>
+    {% endif %}
+    {% if user.is_authenticated %}
+        <a href={% url 'logout' %}>Излез</a>
+    {% else %}
+        <a href="{% url 'user_login' %}">ВХОД</a>
+    {% endif %}
+    <a href="#menu">МЕНЮ</a>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        {% if user.is_authenticated %}
+            {% return_menu_items "logged" as site_menu %}
+            {% for item,value in site_menu.items %}
+                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>
+            {% endfor %}
+        {% else %}
+            {% return_menu_items "not_logged" as site_menu %}
+            {% for item,value in site_menu.items %}
+                <li><a href="../{{ value.1 }}">{{ value.0 }}</a></li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</nav>
+
+<section id="One" class="wrapper style3">
+    <div class="inner">
+        <header class="align-center">
+
+            <p>
+                {% block page_title %}{% endblock %}
+            </p>
+            <h2>Rady and the Stars</h2>
+        </header>
+    </div>
+</section>
+
+{% block body_contents %}
+{% endblock %}
+
+<footer id="footer">
+    <div class="container">
+        <ul class="icons">
+            <li><a href="https://www.facebook.com/radyandthestars/" class="icon fa-facebook"><span class="label">Facebook</span></a>
+            </li>
+            <li><a href="https://www.instagram.com/rady_and_the_stars/" class="icon fa-instagram"><span class="label">Instagram</span></a>
+            </li>
+            <li><a href="mailto:radyandthestars@gmail.com" class="icon fa-envelope-o"><span
+                    class="label">Email</span></a></li>
+        </ul>
+        <a href="{% url 'main_app:order' %}">Поръчай услуга</a>
+        <a href="{% url 'main_app:Rady' %} ">Rady</a>
+        <a href="{% url 'main_app:contacts' %}">Контакт</a>
+
+    </div>
+    <div class="copyright">
+        &copy; Rady and the stars
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="{% static '/js/jquery.scrollex.min.js' %}"></script>
+<script src="{% static 'js/skel.min.js' %}"></script>
+<script src="{% static '/js/util.js' %}"></script>
+<script src="{% static '/js/main.js' %}"></script>
+
+
+</body>
+</html>
