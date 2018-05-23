@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import DetailView, ListView, UpdateView, CreateView
+from django.views.generic import DetailView, ListView, UpdateView, CreateView, TemplateView
 from user_content.forms import SiteUserCreateForm, UserUploadPic
 from user_content import models
 from tarot_of_the_day import models as tarot_model
@@ -17,14 +17,18 @@ class UserRegister(CreateView):
     template_name = 'user_content/register.html'
 
 
-@login_required
-def Index(request):
-    username = request.user
-    user_id = username.id
-    user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
-    if not user_extra_info:
-        models.SiteUser().null_writer(logged_user_id=user_id)
-    return render(request, 'user_content/index.html')
+class Index(LoginRequiredMixin, TemplateView):
+    template_name = 'user_content/index.html'
+
+
+# @login_required
+# def Index(request):
+#     username = request.user
+#     user_id = username.id
+#     user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
+#     if not user_extra_info:
+#         models.SiteUser().null_writer(logged_user_id=user_id)
+#     return render(request, 'user_content/index.html')
 
 
 @login_required
@@ -33,8 +37,8 @@ def user_profile_view(request):
     user_main_profile = models.User.objects.filter(username=username)
     user_id = username.id
     user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
-    if not user_extra_info:
-        models.SiteUser().null_writer(logged_user_id=user_id)
+    # if not user_extra_info:
+    #     models.SiteUser().null_writer(logged_user_id=user_id)
     data_dict = {
         'main_info': user_main_profile,
         'extra_info': user_extra_info,

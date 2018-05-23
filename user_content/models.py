@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 import os
-from django.contrib.auth import get_user_model
+from django.db.models.signals import post_save
 
 
 # Create your models here.
@@ -50,3 +50,12 @@ class TextsForUser(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=250)
     article_text = models.CharField(max_length=20000)
+
+#handle post save call if only new user is created. Links User and SiteUser tables.
+def user_post_save_nullwriter_call(sender, instance, created, *args, **kwargs):
+    print(created)
+    if created:
+        SiteUser().null_writer(instance.id)
+
+
+post_save.connect(user_post_save_nullwriter_call, sender=User)
