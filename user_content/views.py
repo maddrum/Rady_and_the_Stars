@@ -21,24 +21,12 @@ class Index(LoginRequiredMixin, TemplateView):
     template_name = 'user_content/index.html'
 
 
-# @login_required
-# def Index(request):
-#     username = request.user
-#     user_id = username.id
-#     user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
-#     if not user_extra_info:
-#         models.SiteUser().null_writer(logged_user_id=user_id)
-#     return render(request, 'user_content/index.html')
-
-
 @login_required
 def user_profile_view(request):
     username = request.user
     user_main_profile = models.User.objects.filter(username=username)
     user_id = username.id
     user_extra_info = models.SiteUser.objects.filter(user_id=user_id)
-    # if not user_extra_info:
-    #     models.SiteUser().null_writer(logged_user_id=user_id)
     data_dict = {
         'main_info': user_main_profile,
         'extra_info': user_extra_info,
